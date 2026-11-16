@@ -7,13 +7,17 @@ import { QrShareModal } from './components/QrShareModal';
 import { QuizModal } from './components/QuizModal';
 import { TimelineDock } from './components/TimelineDock';
 import { TopBar } from './components/TopBar';
+import { UniverseMindMap } from './components/UniverseMindMap';
 import type { CosmicNodeData } from './data/bigBangData';
 import {
   parseThemeFromHash,
+  parseViewFromHash,
   THEME_LIST,
   THEMES,
+  type AppView,
   type ThemeId,
 } from './data/themes';
+import { UNIVERSE_CENTER_NODE } from './data/universeHubData';
 
 interface ThemeProgressState {
   currentStepIndex: number;
@@ -37,6 +41,11 @@ function createInitialProgress(): Record<ThemeId, ThemeProgressState> {
 }
 
 export function App() {
+  const [activeView, setActiveView] = useState<AppView>(() =>
+    typeof window !== 'undefined'
+      ? parseViewFromHash(window.location.hash)
+      : 'universet',
+  );
   const [activeThemeId, setActiveThemeId] = useState<ThemeId>(() =>
     typeof window !== 'undefined'
       ? parseThemeFromHash(window.location.hash)
@@ -52,6 +61,7 @@ export function App() {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isCinemaFallback, setIsCinemaFallback] = useState(false);
 
+  const isMindMap = activeView === 'universet';
   const activeTheme = THEMES[activeThemeId];
   const progress = progressByTheme[activeThemeId];
   const {
@@ -66,30 +76,46 @@ export function App() {
   }, []);
 
   useEffect(() => {
-    document.title = `${activeTheme.title} | Interaktiv Klasseromspresentasjon`;
-  }, [activeTheme.title]);
+    const pageTitle = isMindMap
+      ? UNIVERSE_CENTER_NODE.dropdownTitle
+      : activeTheme.title;
+    document.title = `${pageTitle} | Interaktiv Klasseromspresentasjon`;
+  }, [activeTheme.title, isMindMap]);
 
   useEffect(() => {
-    const onHashChange = () => {
-      const nextTheme = parseThemeFromHash(window.location.hash);
-      setActiveThemeId(nextTheme);
+    const syncFromUrl = () => {
+      const nextView = parseViewFromHash(window.location.hash);
+      setActiveView(nextView);
+      if (nextView !== 'universet') {
+        setActiveThemeId(nextView);
+      }
       setIsQuizOpen(false);
+      setLightboxNode(null);
     };
-    window.addEventListener('hashchange', onHashChange);
-    return () => window.removeEventListener('hashchange', onHashChange);
+    window.addEventListener('hashchange', syncFromUrl);
+    window.addEventListener('popstate', syncFromUrl);
+    return () => {
+      window.removeEventListener('hashchange', syncFromUrl);
+      window.removeEventListener('popstate', syncFromUrl);
+    };
   }, []);
 
-  const handleSelectTheme = useCallback((nextThemeId: ThemeId) => {
-    setActiveThemeId(nextThemeId);
+  const handleSelectView = useCallback((nextView: AppView) => {
+    setActiveView(nextView);
+    if (nextView !== 'universet') {
+      setActiveThemeId(nextView);
+    }
     setIsQuizOpen(false);
     setLightboxNode(null);
-    const nextConfig = THEMES[nextThemeId];
+
     const targetHash =
-      nextConfig.id === THEME_LIST[0]?.id ? '' : nextConfig.hash;
+      nextView === 'universet' ? '' : THEMES[nextView].hash;
     try {
       const url = new URL(window.location.href);
-      url.hash = targetHash;
-      window.history.replaceState(null, '', url.toString());
+      if (url.hash !== targetHash) {
+        url.hash = targetHash;
+        window.history.pushState(null, '', url.toString());
+      }
     } catch {
       // Ignore in restricted iframe contexts
     }
@@ -282,6 +308,8 @@ export function App() {
         }
       }
 
+      if (isMindMap) return;
+
       if (e.key === 'q' || e.key === 'Q') {
         if (!e.ctrlKey && !e.metaKey && !e.altKey) {
           e.preventDefault();
@@ -309,6 +337,7 @@ export function App() {
     handleNext,
     handlePrev,
     isCinemaFallback,
+    isMindMap,
     isQrOpen,
     isQuizOpen,
     lightboxNode,
@@ -320,15 +349,22 @@ export function App() {
     activeTheme.nodeMap[activeTheme.mainStepIds[0]];
 
   return (
-    <div className="min-h-screen lg:h-screen flex flex-col cosmic-canvas text-slate-100 overflow-x-hidden lg:overflow-hidden relative">
+    <div
+      className={`min-h-screen ${
+        isMindMap
+          ? 'min-h-[100dvh] h-[100dvh] overflow-x-hidden overflow-y-auto'
+          : 'lg:h-screen overflow-x-hidden lg:overflow-hidden'
+      } flex flex-col cosmic-canvas text-slate-100 relative`}
+    >
       {!isCinemaFallback ? (
         <TopBar
+          activeView={activeView}
           activeTheme={activeTheme}
           currentStepIndex={currentStepIndex}
           showAllSteps={showAllSteps}
           isQuizOpen={isQuizOpen}
           isFullscreen={isFullscreen}
-          onSelectTheme={handleSelectTheme}
+          onSelectView={handleSelectView}
           onToggleShowAll={handleToggleShowAll}
           onToggleQuiz={() => setIsQuizOpen((prev) => !prev)}
           onOpenQrModal={() => setIsQrOpen(true)}
@@ -347,62 +383,76 @@ export function App() {
         </button>
       )}
 
-      {/* Main split classroom stage: Left/Top Interactive Timeline + Right Info Card */}
-      <main className="flex-1 min-h-0 p-3 pb-24 sm:p-4 sm:pb-24 lg:px-6 lg:py-4 lg:pb-4 grid grid-cols-1 lg:grid-cols-12 gap-3.5 sm:gap-4 max-w-[1920px] w-full mx-auto">
-        <section
-          aria-label={activeTheme.title}
-          className="h-[44vh] min-h-[290px] sm:h-[50vh] lg:h-full lg:col-span-7 xl:col-span-7"
+      {isMindMap ? (
+        <main
+          aria-label="Universet – Tankekart"
+          className="flex-1 min-h-0 flex flex-col w-full"
         >
-          {activeThemeId === 'big-bang' && (
-            <BigBangTimeline
-              unlockedStepIndex={unlockedStepIndex}
-              showAllSteps={showAllSteps}
-              selectedNodeId={selectedNodeId}
-              onSelectNode={handleSelectNode}
+          <UniverseMindMap
+            onSelectTheme={(themeId) => handleSelectView(themeId)}
+          />
+        </main>
+      ) : (
+        <>
+          {/* Main split classroom stage: Left/Top Interactive Timeline + Right Info Card */}
+          <main className="flex-1 min-h-0 p-3 pb-24 sm:p-4 sm:pb-24 lg:px-6 lg:py-4 lg:pb-4 grid grid-cols-1 lg:grid-cols-12 gap-3.5 sm:gap-4 max-w-[1920px] w-full mx-auto">
+            <section
+              aria-label={activeTheme.title}
+              className="h-[44vh] min-h-[290px] sm:h-[50vh] lg:h-full lg:col-span-7 xl:col-span-7"
+            >
+              {activeThemeId === 'big-bang' && (
+                <BigBangTimeline
+                  unlockedStepIndex={unlockedStepIndex}
+                  showAllSteps={showAllSteps}
+                  selectedNodeId={selectedNodeId}
+                  onSelectNode={handleSelectNode}
+                />
+              )}
+            </section>
+
+            <section
+              aria-label="Fagkort for valgt steg"
+              className="lg:h-full lg:col-span-5 xl:col-span-5 min-h-0"
+            >
+              <InfoPanel
+                activeTheme={activeTheme}
+                node={activeNode}
+                onOpenLightbox={(node) => setLightboxNode(node)}
+              />
+            </section>
+          </main>
+
+          <TimelineDock
+            activeTheme={activeTheme}
+            currentStepIndex={currentStepIndex}
+            unlockedStepIndex={unlockedStepIndex}
+            showAllSteps={showAllSteps}
+            onPrev={handlePrev}
+            onNext={handleNext}
+            onJumpToStep={jumpToStep}
+          />
+
+          {isQuizOpen && (
+            <QuizModal
+              key={activeThemeId}
+              activeTheme={activeTheme}
+              onClose={() => setIsQuizOpen(false)}
+              onJumpToStep={jumpToStep}
             />
           )}
-        </section>
 
-        <section
-          aria-label="Fagkort for valgt steg"
-          className="lg:h-full lg:col-span-5 xl:col-span-5 min-h-0"
-        >
-          <InfoPanel
-            activeTheme={activeTheme}
-            node={activeNode}
-            onOpenLightbox={(node) => setLightboxNode(node)}
+          <ImageLightbox
+            node={lightboxNode}
+            onClose={() => setLightboxNode(null)}
           />
-        </section>
-      </main>
-
-      <TimelineDock
-        activeTheme={activeTheme}
-        currentStepIndex={currentStepIndex}
-        unlockedStepIndex={unlockedStepIndex}
-        showAllSteps={showAllSteps}
-        onPrev={handlePrev}
-        onNext={handleNext}
-        onJumpToStep={jumpToStep}
-      />
-
-      {isQuizOpen && (
-        <QuizModal
-          key={activeThemeId}
-          activeTheme={activeTheme}
-          onClose={() => setIsQuizOpen(false)}
-          onJumpToStep={jumpToStep}
-        />
+        </>
       )}
 
       <QrShareModal
+        activeView={activeView}
         activeTheme={activeTheme}
         isOpen={isQrOpen}
         onClose={() => setIsQrOpen(false)}
-      />
-
-      <ImageLightbox
-        node={lightboxNode}
-        onClose={() => setLightboxNode(null)}
       />
     </div>
   );

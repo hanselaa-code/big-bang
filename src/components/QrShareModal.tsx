@@ -1,18 +1,21 @@
 import { Check, Copy, QrCode, Smartphone, X } from 'lucide-react';
 import QRCode from 'qrcode';
 import { useEffect, useMemo, useState } from 'react';
-import type { ThemeConfig } from '../data/themes';
+import type { AppView, ThemeConfig } from '../data/themes';
+import { UNIVERSE_CENTER_NODE } from '../data/universeHubData';
 
 export const DEFAULT_PUBLIC_CLASSROOM_URL =
   'https://hanselaa-code.github.io/big-bang/';
 
 interface QrShareModalProps {
+  activeView: AppView;
   activeTheme: ThemeConfig;
   isOpen: boolean;
   onClose: () => void;
 }
 
 export function QrShareModal({
+  activeView,
   activeTheme,
   isOpen,
   onClose,
@@ -20,7 +23,13 @@ export function QrShareModal({
   const [svgMarkup, setSvgMarkup] = useState<string>('');
   const [copied, setCopied] = useState(false);
 
+  const displayTitle =
+    activeView === 'universet'
+      ? UNIVERSE_CENTER_NODE.dropdownTitle
+      : activeTheme.dropdownTitle;
+
   const shareUrl = useMemo(() => {
+    const targetHash = activeView === 'universet' ? '' : activeTheme.hash;
     if (typeof window !== 'undefined') {
       const { protocol, hostname, origin, pathname } = window.location;
       const isPublicWeb =
@@ -29,15 +38,11 @@ export function QrShareModal({
         hostname !== '127.0.0.1';
       if (isPublicWeb) {
         const base = `${origin}${pathname}`;
-        return activeTheme.id === 'big-bang'
-          ? base
-          : `${base}${activeTheme.hash}`;
+        return `${base}${targetHash}`;
       }
     }
-    return activeTheme.id === 'big-bang'
-      ? DEFAULT_PUBLIC_CLASSROOM_URL
-      : `${DEFAULT_PUBLIC_CLASSROOM_URL}${activeTheme.hash}`;
-  }, [activeTheme.hash, activeTheme.id]);
+    return `${DEFAULT_PUBLIC_CLASSROOM_URL}${targetHash}`;
+  }, [activeTheme.hash, activeView]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -99,7 +104,7 @@ export function QrShareModal({
         <div className="space-y-1.5">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-400/35 text-amber-300 text-xs font-bold uppercase tracking-wider">
             <QrCode className="w-3.5 h-3.5" />
-            <span>Del tema: {activeTheme.dropdownTitle}</span>
+            <span>Del visning: {displayTitle}</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-white font-display">
             Skann for å åpne på mobil
@@ -107,7 +112,7 @@ export function QrShareModal({
           <p className="text-xs sm:text-sm text-slate-300 flex items-center justify-center gap-1.5">
             <Smartphone className="w-4 h-4 text-sky-300 shrink-0" />
             <span>
-              Åpner direkte i «{activeTheme.dropdownTitle}» på elevenes telefon
+              Åpner direkte i «{displayTitle}» på elevenes telefon
             </span>
           </p>
         </div>

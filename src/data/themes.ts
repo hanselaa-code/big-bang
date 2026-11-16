@@ -9,6 +9,7 @@ import {
 import { BIG_BANG_MCQ_QUESTIONS, type McqQuestionItem } from './mcqQuestionsData';
 
 export type ThemeId = 'big-bang';
+export type AppView = 'universet' | ThemeId;
 
 export interface ThemeConfig {
   id: ThemeId;
@@ -74,10 +75,15 @@ export const THEMES: Record<ThemeId, ThemeConfig> = {
 
 export const THEME_LIST: ThemeConfig[] = [THEMES['big-bang']];
 
-export function parseThemeFromHash(hash: string): ThemeId {
+export function parseViewFromHash(hash: string): AppView {
   const clean = hash.replace(/^#/, '').trim().toLowerCase();
   if (clean === 'big-bang' || clean === 'tidslinje') {
     return 'big-bang';
   }
-  return 'big-bang';
+  return 'universet';
+}
+
+export function parseThemeFromHash(hash: string): ThemeId {
+  const view = parseViewFromHash(hash);
+  return view === 'universet' ? 'big-bang' : view;
 }
