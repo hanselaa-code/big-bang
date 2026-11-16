@@ -529,4 +529,175 @@ export const ELEMENTS_MCQ_QUESTIONS: McqQuestionItem[] = [
   },
 ];
 
-
+export const SPACETIME_MCQ_QUESTIONS: McqQuestionItem[] = [
+  {
+    id: 'st-mcq-1',
+    number: 1,
+    relatedStepIndex: 0,
+    topicBadge: 'Steg 1 • 4 dimensjoner (Romtid)',
+    question:
+      'Hva mener fysikere når de sier at vi lever i en firedimensjonal «romtid»?',
+    options: [
+      'At det finnes fire ulike solsystemer oppå hverandre på samme sted',
+      'At de tre romdimensjonene (lengde, bredde, høyde) og tiden (1D) er vevd sammen og påvirker hverandre',
+      'At tiden alltid går baklengs så snart man forlater Jordas atmosfære',
+      'At universet er formet som en firkantet kasse med rette vegger',
+    ],
+    correctIndex: 1,
+    explanation:
+      'Einstein viste at rom (3D) og tid (1D) ikke er adskilte størrelser, men én elastisk firedimensjonal vev der bevegelse og masse påvirker både avstander og klokker.',
+  },
+  {
+    id: 'st-mcq-2',
+    number: 2,
+    relatedStepIndex: 1,
+    topicBadge: 'Steg 2 • Lysfarten c & Lysår',
+    question:
+      'Hva måler enheten «ett lysår», og hvorfor fungerer et romteleskop som en tidsmaskin?',
+    options: [
+      'Ett lysår måler tid (ca. 365 millioner år), og teleskopet spoler frem i fremtiden',
+      'Ett lysår måler lysstyrke, og teleskopet gjør unge stjerner eldre',
+      'Ett lysår måler avstand (ca. 9 460 milliarder km), og siden lyset bruker tid på reisen ser vi alltid himmellegemer slik de var i fortiden',
+      'Ett lysår måler temperaturen inne i kjernen på Sola',
+    ],
+    correctIndex: 2,
+    explanation:
+      'Lysår er strekningen lyset reiser på ett år med c ≈ 300 000 km/s. Når lyset fra en galakse bruker millioner eller milliarder av år hit, ser vi galaksen slik den så ut da lyset dro!',
+  },
+  {
+    id: 'st-mcq-3',
+    number: 3,
+    relatedStepIndex: 2,
+    topicBadge: 'Steg 3 • Relativ tid & GPS',
+    question:
+      'Hvorfor må GPS-satellitter rundt Jorda korrigere klokkene sine ved hjelp av Einsteins relativitetsteori?',
+    options: [
+      'Fordi både satellittenes høye fart og den svakere tyngdekraften 20 200 km oppe gjør at satellittklokkene går ~38 mikrosekunder raskere per døgn enn på bakken',
+      'Fordi sollys dytter satellittene ut av bane hvert tiende sekund',
+      'Fordi radiosignaler ikke kan bevege seg gjennom vakuum i verdensrommet',
+      'Fordi tidssonene i Europa og Amerika bytter plass om natten',
+    ],
+    correctIndex: 0,
+    explanation:
+      'Uten relativistisk korreksjon av de 38 mikrosekundene per døgn ville GPS-posisjonen på mobilen bommet med over 10 kilometer allerede etter én dag!',
+  },
+  {
+    id: 'st-mcq-4',
+    number: 4,
+    relatedStepIndex: 3,
+    topicBadge: 'Steg 4 • Masse krummer romtiden',
+    question:
+      'Hvordan forklarer Einsteins generelle relativitetsteori (1915) hva tyngdekraft (gravitasjon) egentlig er?',
+    options: [
+      'En elektrisk strøm mellom nordpolen og sørpolen på planetene',
+      'Lufttrykk fra gasskyer mellom stjernene som presser planetene nedover',
+      'En øyeblikkelig magnetisk gnist som hopper raskere enn lyset',
+      'Masse og energi krummer selve romtiden rundt seg, og gjenstander følger denne krumningen',
+    ],
+    correctIndex: 3,
+    explanation:
+      'Tyngdekraft er ikke en mystisk fjernkraft gjennom stivt tomrom, men selve geometrien i romtiden som bøyes av masse og energi!',
+  },
+  {
+    id: 'st-mcq-5',
+    number: 5,
+    relatedStepIndex: 4,
+    topicBadge: 'Steg 5 • Gravitasjonsbrønn & Baner',
+    question:
+      'Hvorfor svever astronautene vektløse inne på Den internasjonale romstasjonen (ISS) ca. 400 km over Jorda?',
+    options: [
+      'Fordi det er 0 % tyngdekraft så snart man kommer over skyene',
+      'Fordi både romstasjonen og astronautene går med ~27 600 km/t i kontinuerlig fritt fall langs Jordas krummede romtid',
+      'Fordi draktene deres er fylt med heliumgass',
+      'Fordi Månen opphever all tyngdekraft fra Jorda i lav jordbane',
+    ],
+    correctIndex: 1,
+    explanation:
+      '400 km oppe er tyngdekraften fortsatt nesten 90 % like sterk som på bakken! Astronautene svever fordi de og romstasjonen faller fritt i bane rundt Jorda med stor sidefart.',
+  },
+  {
+    id: 'st-mcq-6',
+    number: 6,
+    relatedStepIndex: 5,
+    topicBadge: 'Steg 6 • Gravitasjonslinser',
+    question:
+      'Hvordan kan en tung galaksehop virke som en «gravitasjonslinse» som bøyer og forstørrer lys, når lyspartikler (fotoner) ikke har masse?',
+    options: [
+      'Fordi lyset følger selve romtiden – og når galaksehopen krummer romtiden, bøyes også lysets bane',
+      'Fordi gassen mellom galaksene er lagd av polert kvartsglass',
+      'Fordi fotoner får stor masse hver gang de passerer en stjerne',
+      'Fordi lyset spretter tilbake som et ekko fra måneoverflaten',
+    ],
+    correctIndex: 0,
+    explanation:
+      'Lys tar alltid den raskeste/retteste veien gjennom romtiden. Når tunge galaksehoper (og mørk materie!) krummer rommet, bøyes lyset til buer og Einstein-ringer.',
+  },
+  {
+    id: 'st-mcq-7',
+    number: 7,
+    relatedStepIndex: 6,
+    topicBadge: 'Steg 7 • Sorte hull & Hendelseshorisont',
+    question:
+      'Hva skjer med romtiden og tiden ved «hendelseshorisonten» til et sort hull?',
+    options: [
+      'Romtiden blir helt flat, og klokker tikker tusen ganger raskere enn på Jorda',
+      'Alle nærliggende planeter uansett avstand suges inn på få sekunder',
+      'Romtiden krummes så ekstremt at unnslipningsfarten passerer lysfarten c, og sett utenfra ser tiden ut til å bremse kraftig opp',
+      'Det sorte hullet tenner kjernefusjon på nytt og blir til en gul stjerne',
+    ],
+    correctIndex: 2,
+    explanation:
+      'Innenfor hendelseshorisonten kreves større fart enn lysfarten c for å slippe ut, og ekstrem gravitasjonell tidsdilatasjon gjør at klokker der nede går voldsomt sakte sett utenfra.',
+  },
+  {
+    id: 'st-mcq-8',
+    number: 8,
+    relatedStepIndex: 7,
+    topicBadge: 'Steg 8 • Gravitasjonsbølger',
+    question:
+      'Hva var det LIGO-observatoriet målte direkte for første gang i 2015?',
+    options: [
+      'Lydbølger gjennom lufta fra et vulkanutbrudd på Venus',
+      'Gravitasjonsbølger – ørsmå krusninger som strekker og krymper selve romtiden etter to kolliderende sorte hull',
+      'Radiosignaler fra den første stjernen i Melkeveien',
+      'Solvind fra en solstorm rett mot Jorda',
+    ],
+    correctIndex: 1,
+    explanation:
+      'Hundre år etter at Einstein spådde dem, målte LIGO gravitasjonsbølger fra sammensmeltende sorte hull – en lengdeendring mindre enn en tusendels protonbredde over 4 km!',
+  },
+  {
+    id: 'st-mcq-9',
+    number: 9,
+    relatedStepIndex: 8,
+    topicBadge: 'Steg 9 • Rommet selv utvider seg',
+    question:
+      'Hva er hovedpoenget med «rosinbolle-modellen» (eller ballongmodellen) for universets utvidelse?',
+    options: [
+      'At Melkeveien ligger helt alene i det eksakte midtpunktet av et tomt rom mens alle andre galakser flyr vekk fra bare oss',
+      'At Jorda og menneskekroppen vokser til dobbel størrelse hvert milliardte år',
+      'At det er selve rommet MELLOM galaksehopene som utvider seg overalt uten noe midtpunkt, og strekker lysbølgene mot rødt',
+      'At universet har en hard skorpe ytterst laget av stein og is',
+    ],
+    correctIndex: 2,
+    explanation:
+      'Lokale systemer som oss og Melkeveien holdes samlet av krefter og tyngdekraft, mens selve rommet mellom galaksehopene vokser overalt og gir kosmisk rødforskyvning!',
+  },
+  {
+    id: 'st-mcq-10',
+    number: 10,
+    relatedStepIndex: 9,
+    topicBadge: 'Steg 10 • Mørk materie vs. Mørk energi',
+    question:
+      'Hvordan skiller virkningen av mørk materie (~27 %) seg fra mørk energi (~68 %) på stor skala i romtiden?',
+    options: [
+      'Mørk materie lyser kraftig i røntgen, mens mørk energi lyser i synlig grønt lys',
+      'Begge to består av vanlige hydrogenatomer fra Big Bang',
+      'Mørk materie skyver galaksene fra hverandre, mens mørk energi samler støv til planeter',
+      'Mørk materie krummer romtiden og holder galakser/hoper samlet («lim»), mens mørk energi får universets utvidelse til å akselerere («gasspedal»)',
+    ],
+    correctIndex: 3,
+    explanation:
+      'Mørk materie bidrar med ekstra tiltrekkende gravitasjonsbrønner rundt galaksene, mens mørk energi driver den akselererende utvidelsen av tomrommet mellom galaksehopene!',
+  },
+];

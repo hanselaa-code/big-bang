@@ -101,14 +101,14 @@ export const UNIVERSE_HUB_NODES: UniverseHubNode[] = [
   {
     id: 'romtid',
     title: 'Romtid',
-    badge: 'Kommer snart',
+    badge: 'Romtidsduken • Gravitasjon, linser & utvidelse',
     shortDescription:
       'Rom og tid vevd sammen, gravitasjon, sorte hull og hvordan selve rommet utvider seg.',
     imageUrl: cosmosImg('hub_romtid.jpg'),
     cx: 785,
     cy: 630,
     r: 98,
-    linkedThemeId: null,
+    linkedThemeId: 'romtid',
   },
 ];
 

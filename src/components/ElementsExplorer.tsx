@@ -263,38 +263,39 @@ export function ElementsExplorer({
       ref={containerRef}
       className="relative w-full h-full rounded-2xl overflow-hidden glass-panel select-none"
     >
-      {/* Top-left concise legend */}
-      <div className="absolute top-3 left-3 z-20 flex flex-wrap items-center gap-2 pointer-events-none">
-        <div className="px-3 py-1.5 rounded-xl bg-slate-950/85 border border-slate-700/80 text-xs font-medium text-slate-200 flex items-center gap-2 shadow-lg">
-          <Sparkles className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-          <span>Grunnstoff-modell</span>
-          <span className="hidden xl:inline text-slate-400">
-            • Dra for å panorere, skroll for zoom
-          </span>
+      {/* Top overlay bar: left legend stacked cleanly + right camera buttons */}
+      <div className="absolute inset-x-3 top-3 z-20 flex items-start justify-between gap-2 pointer-events-none">
+        <div className="flex flex-col items-start gap-1.5 min-w-0">
+          <div className="px-3 py-1.5 rounded-xl bg-slate-950/85 border border-slate-700/80 text-xs font-medium text-slate-200 flex items-center gap-2 shadow-lg">
+            <Sparkles className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+            <span>Grunnstoff-modell</span>
+            <span className="hidden xl:inline text-slate-400">
+              • Dra for å panorere, skroll for zoom
+            </span>
+          </div>
+
+          <div className="hidden md:flex flex-wrap items-center gap-2.5 px-3 py-1 rounded-xl bg-slate-950/80 border border-slate-800/90 text-[11px] text-slate-300">
+            <span className="inline-flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-sky-400" />
+              Atomkjerne
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-teal-400" />
+              Skall &amp; spekter
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-amber-400" />
+              Big Bang &amp; stjerner
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-purple-400" />
+              Supernova &amp; kilonova
+            </span>
+          </div>
         </div>
 
-        <div className="hidden md:flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-slate-950/80 border border-slate-800/90 text-[11px] text-slate-300">
-          <span className="inline-flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-sky-400" />
-            Atomkjerne
-          </span>
-          <span className="inline-flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-teal-400" />
-            Skall &amp; spekter
-          </span>
-          <span className="inline-flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-amber-400" />
-            Big Bang &amp; stjerner
-          </span>
-          <span className="inline-flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-purple-400" />
-            Supernova &amp; kilonova
-          </span>
-        </div>
-      </div>
-
-      {/* Top-right camera controls */}
-      <div className="absolute top-3 right-3 z-20 flex items-center gap-1.5">
+        {/* Top-right camera controls */}
+        <div className="flex items-center gap-1.5 shrink-0 pointer-events-auto">
         <button
           id="btn-elements-follow"
           type="button"
@@ -346,6 +347,7 @@ export function ElementsExplorer({
             <Minus className="w-4 h-4" />
           </button>
         </div>
+      </div>
       </div>
 
       {/* Main Interactive SVG Canvas */}

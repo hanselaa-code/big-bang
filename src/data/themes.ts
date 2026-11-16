@@ -15,9 +15,16 @@ import {
 import {
   BIG_BANG_MCQ_QUESTIONS,
   ELEMENTS_MCQ_QUESTIONS,
+  SPACETIME_MCQ_QUESTIONS,
   STARS_MCQ_QUESTIONS,
   type McqQuestionItem,
 } from './mcqQuestionsData';
+import {
+  SPACETIME_CONTROL_QUESTIONS,
+  SPACETIME_MAIN_STEP_IDS,
+  SPACETIME_NODE_MAP,
+  SPACETIME_NODES,
+} from './spacetimeData';
 import {
   STARS_CONTROL_QUESTIONS,
   STARS_MAIN_STEP_IDS,
@@ -25,7 +32,7 @@ import {
   STARS_NODES,
 } from './starsData';
 
-export type ThemeId = 'big-bang' | 'stjerner' | 'grunnstoffer';
+export type ThemeId = 'big-bang' | 'stjerner' | 'grunnstoffer' | 'romtid';
 export type AppView = 'universet' | ThemeId;
 
 export interface ThemeConfig {
@@ -160,12 +167,49 @@ export const THEMES: Record<ThemeId, ThemeConfig> = {
       { label: 'Del 10: Stjernestøv i mennesket', idx: 9 },
     ],
   },
+
+  romtid: {
+    id: 'romtid',
+    hash: '#romtid',
+    title: 'Romtid – Krummet rom, sorte hull, gravitasjonsbølger og utvidelse',
+    dropdownTitle: 'Romtid – Gravitasjon & utvidelse',
+    dropdownBadge: 'Romtidsduk • 4D, linser & mørk energi',
+    dropdownDescription:
+      'Reis langs den krummede romtidsduken fra 4 dimensjoner, lysfarten c og GPS til gravitasjonsbrønner, gravitasjonslinser, sorte hull, bølger i duken og rommet som utvider seg.',
+    subtitle:
+      'Interaktiv romtidsduk • Fra Einsteins relativitetsteori og sorte hull til kosmisk utvidelse (Vg1 Naturfag)',
+    stepWord: 'Steg',
+    showAllLabel: 'Vis hele romtidsduken',
+    progressiveLabel: 'Stegvis modus',
+    quizTitle: 'Kontrollspørsmål: Romtid, tyngdekraft & universets utvidelse',
+    backFromQuizLabel: 'Tilbake til romtidsduken',
+    summaryHeadingPrefix: 'Hva skjer i romtiden?',
+    traitsHeading: 'Fysiske mekanismer og nøkkelpunkter',
+    classroomBoxHeading: 'Klasseromstriks & tankeeksperiment',
+    examplesHeading: 'Nøkkelbegreper på dette steget',
+    mainStepIds: SPACETIME_MAIN_STEP_IDS,
+    allNodes: SPACETIME_NODES,
+    nodeMap: SPACETIME_NODE_MAP,
+    controlQuestions: SPACETIME_CONTROL_QUESTIONS,
+    mcqQuestions: SPACETIME_MCQ_QUESTIONS,
+    quizShortcuts: [
+      { label: 'Steg 1: 4 dimensjoner (Rom + Tid)', idx: 0 },
+      { label: 'Steg 2: Lysfarten c & lysår', idx: 1 },
+      { label: 'Steg 3: Relativ tid & GPS', idx: 2 },
+      { label: 'Steg 4–5: Krummet romtid & baner', idx: 4 },
+      { label: 'Steg 6: Gravitasjonslinser', idx: 5 },
+      { label: 'Steg 7: Sorte hull', idx: 6 },
+      { label: 'Steg 8: Gravitasjonsbølger', idx: 7 },
+      { label: 'Steg 9–10: Utvidelse & mørk energi', idx: 8 },
+    ],
+  },
 };
 
 export const THEME_LIST: ThemeConfig[] = [
   THEMES['big-bang'],
   THEMES.stjerner,
   THEMES.grunnstoffer,
+  THEMES.romtid,
 ];
 
 export function parseViewFromHash(hash: string): AppView {
@@ -182,6 +226,9 @@ export function parseViewFromHash(hash: string): AppView {
     clean === 'elements'
   ) {
     return 'grunnstoffer';
+  }
+  if (clean === 'romtid' || clean === 'spacetime') {
+    return 'romtid';
   }
   return 'universet';
 }
