@@ -1,6 +1,7 @@
 import { Minimize } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
 import { BigBangTimeline } from './components/BigBangTimeline';
+import { ElementsExplorer } from './components/ElementsExplorer';
 import { ImageLightbox } from './components/ImageLightbox';
 import { InfoPanel } from './components/InfoPanel';
 import { QrShareModal } from './components/QrShareModal';
@@ -411,6 +412,14 @@ export function App() {
               )}
               {activeThemeId === 'stjerner' && (
                 <StarsBranchingTimeline
+                  unlockedStepIndex={unlockedStepIndex}
+                  showAllSteps={showAllSteps}
+                  selectedNodeId={selectedNodeId}
+                  onSelectNode={handleSelectNode}
+                />
+              )}
+              {activeThemeId === 'grunnstoffer' && (
+                <ElementsExplorer
                   unlockedStepIndex={unlockedStepIndex}
                   showAllSteps={showAllSteps}
                   selectedNodeId={selectedNodeId}

@@ -65,14 +65,14 @@ export const UNIVERSE_HUB_NODES: UniverseHubNode[] = [
   {
     id: 'grunnstoffer',
     title: 'Grunnstoffer',
-    badge: 'Kommer snart',
+    badge: 'Interaktiv modell • Atomet & de 4 smiene',
     shortDescription:
       'Hvordan hydrogen, helium og alle tyngre grunnstoffer i periodesystemet og kroppen vår ble smidd.',
     imageUrl: cosmosImg('hub_grunnstoffer.jpg'),
     cx: 155,
     cy: 405,
     r: 98,
-    linkedThemeId: null,
+    linkedThemeId: 'grunnstoffer',
   },
   {
     id: 'straling',

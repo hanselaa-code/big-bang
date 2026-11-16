@@ -94,54 +94,56 @@ export function TimelineDock({
         {/* Desktop interactive 10-step bar */}
         <nav
           aria-label={activeTheme.title}
-          className="hidden md:flex items-center gap-1 lg:gap-1.5 flex-1 justify-center overflow-x-auto py-0.5"
+          className="hidden md:flex items-center flex-1 min-w-0 overflow-x-auto custom-scrollbar py-0.5"
         >
-          {mainStepIds.map((id, idx) => {
-            const stepNode = nodeMap[id];
-            const isCurrent = idx === currentStepIndex;
-            const isUnlocked = showAllSteps || idx <= unlockedStepIndex;
+          <div className="mx-auto flex items-center gap-1 lg:gap-1.5 px-0.5">
+            {mainStepIds.map((id, idx) => {
+              const stepNode = nodeMap[id];
+              const isCurrent = idx === currentStepIndex;
+              const isUnlocked = showAllSteps || idx <= unlockedStepIndex;
 
-            return (
-              <button
-                key={id}
-                id={`timeline-step-${idx + 1}`}
-                type="button"
-                onClick={() => onJumpToStep(idx)}
-                title={`${activeTheme.stepWord} ${idx + 1}: ${stepNode.title} (${stepNode.timeAfterBB})`}
-                className={`group flex flex-col items-center px-2 lg:px-2.5 py-1 rounded-xl border transition-all cursor-pointer ${
-                  isCurrent
-                    ? 'bg-amber-500/20 border-amber-400/55 text-white shadow-[0_0_16px_rgba(245,158,11,0.22)]'
-                    : isUnlocked
-                      ? 'bg-slate-900/65 hover:bg-slate-800/80 border-slate-800 text-slate-300'
-                      : 'bg-slate-950/40 hover:bg-slate-900/60 border-slate-800/40 text-slate-500'
-                }`}
-              >
-                <div className="flex items-center gap-1">
-                  <span
-                    className={`w-4 h-4 rounded-full text-[10px] font-extrabold flex items-center justify-center ${
-                      isCurrent
-                        ? 'bg-amber-400 text-slate-950'
-                        : isUnlocked
-                          ? 'bg-amber-500/25 text-amber-300'
-                          : 'bg-slate-800 text-slate-500'
-                    }`}
-                  >
-                    {idx + 1}
-                  </span>
-                  <span className="text-[11px] font-semibold hidden xl:inline max-w-[104px] truncate">
-                    {stepNode.shortLabel}
-                  </span>
-                </div>
-                <span
-                  className={`text-[10px] font-mono-time mt-0.5 max-w-[112px] truncate ${
-                    isCurrent ? 'text-sky-300 font-semibold' : 'text-slate-500'
+              return (
+                <button
+                  key={id}
+                  id={`timeline-step-${idx + 1}`}
+                  type="button"
+                  onClick={() => onJumpToStep(idx)}
+                  title={`${activeTheme.stepWord} ${idx + 1}: ${stepNode.title} (${stepNode.timeAfterBB})`}
+                  className={`group flex flex-col items-center shrink-0 px-2 lg:px-2.5 py-1 rounded-xl border transition-all cursor-pointer ${
+                    isCurrent
+                      ? 'bg-amber-500/20 border-amber-400/55 text-white shadow-[0_0_16px_rgba(245,158,11,0.22)]'
+                      : isUnlocked
+                        ? 'bg-slate-900/65 hover:bg-slate-800/80 border-slate-800 text-slate-300'
+                        : 'bg-slate-950/40 hover:bg-slate-900/60 border-slate-800/40 text-slate-500'
                   }`}
                 >
-                  {stepNode.timeAfterBB}
-                </span>
-              </button>
-            );
-          })}
+                  <div className="flex items-center gap-1">
+                    <span
+                      className={`w-4 h-4 rounded-full text-[10px] font-extrabold flex items-center justify-center ${
+                        isCurrent
+                          ? 'bg-amber-400 text-slate-950'
+                          : isUnlocked
+                            ? 'bg-amber-500/25 text-amber-300'
+                            : 'bg-slate-800 text-slate-500'
+                      }`}
+                    >
+                      {idx + 1}
+                    </span>
+                    <span className="text-[11px] font-semibold hidden xl:inline max-w-[96px] truncate">
+                      {stepNode.shortLabel}
+                    </span>
+                  </div>
+                  <span
+                    className={`text-[10px] font-mono-time mt-0.5 max-w-[104px] truncate ${
+                      isCurrent ? 'text-sky-300 font-semibold' : 'text-slate-500'
+                    }`}
+                  >
+                    {stepNode.timeAfterBB}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </nav>
 
         {/* Mobile clickable step selector pill */}
@@ -171,7 +173,7 @@ export function TimelineDock({
           id="btn-next-step"
           type="button"
           onClick={onNext}
-          className={`flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 min-h-[46px] px-4 sm:px-5 py-2.5 rounded-xl text-sm font-extrabold transition-all cursor-pointer active:scale-[0.97] ${
+          className={`flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 min-h-[46px] px-4 sm:px-5 py-2.5 rounded-xl text-sm font-extrabold transition-all cursor-pointer active:scale-[0.97] shrink-0 ${
             isLastStep
               ? 'bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 shadow-[0_0_25px_rgba(16,185,129,0.4)]'
               : 'bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-300 hover:to-orange-300 text-slate-950 shadow-[0_0_24px_rgba(245,158,11,0.35)]'
@@ -185,7 +187,9 @@ export function TimelineDock({
             </>
           ) : (
             <>
-              <span className="whitespace-nowrap">Neste steg</span>
+              <span className="whitespace-nowrap">
+                Neste {activeTheme.stepWord.toLowerCase()}
+              </span>
               <ArrowRight className="w-4 h-4 shrink-0" />
             </>
           )}

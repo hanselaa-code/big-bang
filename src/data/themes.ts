@@ -7,7 +7,14 @@ import {
   type CosmicNodeData,
 } from './bigBangData';
 import {
+  ELEMENTS_CONTROL_QUESTIONS,
+  ELEMENTS_MAIN_STEP_IDS,
+  ELEMENTS_NODE_MAP,
+  ELEMENTS_NODES,
+} from './elementsData';
+import {
   BIG_BANG_MCQ_QUESTIONS,
+  ELEMENTS_MCQ_QUESTIONS,
   STARS_MCQ_QUESTIONS,
   type McqQuestionItem,
 } from './mcqQuestionsData';
@@ -18,7 +25,7 @@ import {
   STARS_NODES,
 } from './starsData';
 
-export type ThemeId = 'big-bang' | 'stjerner';
+export type ThemeId = 'big-bang' | 'stjerner' | 'grunnstoffer';
 export type AppView = 'universet' | ThemeId;
 
 export interface ThemeConfig {
@@ -116,9 +123,50 @@ export const THEMES: Record<ThemeId, ThemeConfig> = {
       { label: 'Steg 9–10: Pulsar & Sort hull', idx: 9 },
     ],
   },
+
+  grunnstoffer: {
+    id: 'grunnstoffer',
+    hash: '#grunnstoffer',
+    title: 'Grunnstoffer – Atomet, periodesystemet og de 4 kosmiske smiene',
+    dropdownTitle: 'Grunnstoffer – Atomet & smia',
+    dropdownBadge: 'Modell • Nr. 1 (H) → Nr. 92 (U)',
+    dropdownDescription:
+      'Utforsk atomkjernen, isotoper, elektronskall, spektrallinjer og de fire kosmiske smiene (Big Bang, stjerner, supernovaer og kilonovaer) som skapte grunnstoffene i oss.',
+    subtitle:
+      'Interaktiv modell • Fra protoner, skall og spektrallinjer til stjernestøv i menneskekroppen (Vg1 Naturfag)',
+    stepWord: 'Del',
+    showAllLabel: 'Vis hele modellen',
+    progressiveLabel: 'Stegvis modus',
+    quizTitle:
+      'Kontrollspørsmål: Atomet, periodesystemet & grunnstoffenes opprinnelse',
+    backFromQuizLabel: 'Tilbake til grunnstoff-modellen',
+    summaryHeadingPrefix: 'Hva skjer her?',
+    traitsHeading: 'Viktige prinsipper og nøkkelpunkter',
+    classroomBoxHeading: 'Klasseromstriks & tankeeksperiment',
+    examplesHeading: 'Nøkkelbegreper på denne delen',
+    mainStepIds: ELEMENTS_MAIN_STEP_IDS,
+    allNodes: ELEMENTS_NODES,
+    nodeMap: ELEMENTS_NODE_MAP,
+    controlQuestions: ELEMENTS_CONTROL_QUESTIONS,
+    mcqQuestions: ELEMENTS_MCQ_QUESTIONS,
+    quizShortcuts: [
+      { label: 'Del 1: Atomkjernen & protoner', idx: 0 },
+      { label: 'Del 2: Nøytroner & isotoper', idx: 1 },
+      { label: 'Del 3: Elektronskall & periodesystemet', idx: 2 },
+      { label: 'Del 4: Spektrallinjer (strekkode)', idx: 3 },
+      { label: 'Del 5: Smie 1 – Big Bang (H & He)', idx: 4 },
+      { label: 'Del 6–7: Stjerner & Jernmuren (Fe)', idx: 6 },
+      { label: 'Del 8–9: Supernova & Kilonova (Au)', idx: 8 },
+      { label: 'Del 10: Stjernestøv i mennesket', idx: 9 },
+    ],
+  },
 };
 
-export const THEME_LIST: ThemeConfig[] = [THEMES['big-bang'], THEMES.stjerner];
+export const THEME_LIST: ThemeConfig[] = [
+  THEMES['big-bang'],
+  THEMES.stjerner,
+  THEMES.grunnstoffer,
+];
 
 export function parseViewFromHash(hash: string): AppView {
   const clean = hash.replace(/^#/, '').trim().toLowerCase();
@@ -127,6 +175,13 @@ export function parseViewFromHash(hash: string): AppView {
   }
   if (clean === 'stjerner' || clean === 'stars') {
     return 'stjerner';
+  }
+  if (
+    clean === 'grunnstoffer' ||
+    clean === 'grunnstoff' ||
+    clean === 'elements'
+  ) {
+    return 'grunnstoffer';
   }
   return 'universet';
 }

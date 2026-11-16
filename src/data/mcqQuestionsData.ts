@@ -356,3 +356,177 @@ export const STARS_MCQ_QUESTIONS: McqQuestionItem[] = [
   },
 ];
 
+export const ELEMENTS_MCQ_QUESTIONS: McqQuestionItem[] = [
+  {
+    id: 'elem-mcq-1',
+    number: 1,
+    relatedStepIndex: 0,
+    topicBadge: 'Del 1 • Atomkjernen & Atomnummer',
+    question:
+      'Hvilken partikkel i atomet bestemmer med 100 % sikkerhet hvilket grunnstoff atomet er (atomnummeret Z)?',
+    options: [
+      'Antall nøytroner i atomkjernen',
+      'Antall elektroner som til enhver tid er i det ytterste skallet',
+      'Antall protoner i atomkjernen',
+      'Summen av elektroner og fotoner rundt atomet',
+    ],
+    correctIndex: 2,
+    explanation:
+      'Atomnummeret Z er antall protoner i kjernen: 1 proton er alltid hydrogen, 6 protoner er alltid karbon, og 79 protoner er alltid gull!',
+  },
+  {
+    id: 'elem-mcq-2',
+    number: 2,
+    relatedStepIndex: 1,
+    topicBadge: 'Del 2 • Nøytroner & Isotoper',
+    question:
+      'Hva kalles atomer av samme grunnstoff som har nøyaktig like mange protoner, men ulikt antall nøytroner i kjernen (som ¹²C og ¹⁴C)?',
+    options: [
+      'Isotoper',
+      'Edelgasser',
+      'Kilonovaer',
+      'Spektrallinjer',
+    ],
+    correctIndex: 0,
+    explanation:
+      'Isotoper er ulike utgaver av samme grunnstoff med likt antall protoner, men ulikt antall nøytroner (og dermed ulik atommasse og ofte ulik stabilitet).',
+  },
+  {
+    id: 'elem-mcq-3',
+    number: 3,
+    relatedStepIndex: 2,
+    topicBadge: 'Del 3 • Elektronskall & Periodesystemet',
+    question:
+      'Hva forteller de vannrette radene (periodene) og de loddrette kolonnene (hovedgruppene) i periodesystemet om oppbygningen av et atom?',
+    options: [
+      'Perioden viser hvor gammelt atomet er, og gruppen viser hvilken stjerne det kom fra',
+      'Perioden viser antall nøytroner, og gruppen viser kokepunktet i kelvin',
+      'Perioden viser antall protoner i ytterste skall, og gruppen viser antall kjerner',
+      'Perioden viser antall elektronskall rundt kjernen, og hovedgruppen viser antall ytterelektroner',
+    ],
+    correctIndex: 3,
+    explanation:
+      'Raden (perioden) angir antall elektronskall, mens hovedgruppen angir antall elektroner i ytterste skall – som bestemmer grunnstoffets kjemiske egenskaper!',
+  },
+  {
+    id: 'elem-mcq-4',
+    number: 4,
+    relatedStepIndex: 3,
+    topicBadge: 'Del 4 • Spektrallinjer',
+    question:
+      'Hvordan kan astronomer vite nøyaktig hvilke grunnstoffer en stjerne mange hundre lysår unna består av?',
+    options: [
+      'Ved å måle hvor rund stjernen ser ut gjennom et vanlig speilteleskop',
+      'Ved å splitte stjernelyset i et spekter og lese av det unike mønsteret av spektrallinjer som elektronovergangene i hvert grunnstoff lager',
+      'Ved å sende ubemannede romsonder ut for å hente gassprøver fra stjernen',
+      'Ved å telle hvor mange planeter som går i bane rundt stjernen',
+    ],
+    correctIndex: 1,
+    explanation:
+      'Hvert grunnstoff har helt bestemte avstander mellom elektronskallene sine og gir derfor en unik «strekkode» av linjer i lyset fra stjernen.',
+  },
+  {
+    id: 'elem-mcq-5',
+    number: 5,
+    relatedStepIndex: 4,
+    topicBadge: 'Del 5 • Smie 1: Big Bang',
+    question:
+      'Hvor kommer hydrogenatomene (H) i drikkevannet og i kroppen din opprinnelig fra?',
+    options: [
+      'De ble dannet i de første minuttene etter Big Bang for 13,8 milliarder år siden',
+      'De ble fusjonert inne i kjernen på Sola for 1000 år siden og sendt hit med solvinden',
+      'De ble lagd da to nøytronstjerner kolliderte i Melkeveien rett før Jorda ble til',
+      'De skapes hele tiden på nytt av vulkaner dypt nede i jordskorpa',
+    ],
+    correctIndex: 0,
+    explanation:
+      'Stjerner bruker opp hydrogen – de lager det ikke! Alt hydrogen i universet (og ~25 % helium) stammer direkte fra uruniverset rett etter Big Bang.',
+  },
+  {
+    id: 'elem-mcq-6',
+    number: 6,
+    relatedStepIndex: 5,
+    topicBadge: 'Del 6 • Smie 2: Stjernefusjon',
+    question:
+      'Hvordan ble karbonatomene (nr. 6) i DNA-et vårt og oksygenet (nr. 8) vi puster inn opprinnelig dannet?',
+    options: [
+      'Under de tre første sekundene etter Big Bang før universet rakk å utvide seg',
+      'Ved kjemiske reaksjoner mellom sollys og støv på overflaten av Mars',
+      'Ved kjernefusjon av helium inne i kjernen på tidligere generasjoner av stjerner',
+      'Utelukkende ved radioaktiv spalting av uran nede i Jordas mantel',
+    ],
+    correctIndex: 2,
+    explanation:
+      'Når tre heliumkjerner smelter sammen ved over 100 millioner kelvin inne i kjempestjerner (trippel-alfa-prosessen), dannes karbon (6), og videre fusjon gir oksygen (8).',
+  },
+  {
+    id: 'elem-mcq-7',
+    number: 7,
+    relatedStepIndex: 6,
+    topicBadge: 'Del 7 • Jernmuren (nr. 26)',
+    question:
+      'Hvorfor er jern (Fe, atomnummer 26) det tyngste grunnstoffet som kan dannes gjennom vanlig energiproduserende fusjon i en stjernekjerne?',
+    options: [
+      'Fordi jern smelter ved så lav temperatur at det renner ut av stjernen',
+      'Fordi jern har den mest stabilt bundne atomkjernen, slik at videre fusjon krever tilført energi i stedet for å frigjøre energi',
+      'Fordi elektronskallene rundt jern stopper alle nøytroner fra å nærme seg',
+      'Fordi ingen stjerner i universet kan bli varmere enn 5800 kelvin i kjernen',
+    ],
+    correctIndex: 1,
+    explanation:
+      'Opp til jern (nr. 26) gir fusjon energioverskudd. Over nr. 26 krever sammensmelting tilført energi, så vanlige stjernekjerner stopper ved jern!',
+  },
+  {
+    id: 'elem-mcq-8',
+    number: 8,
+    relatedStepIndex: 7,
+    topicBadge: 'Del 8 • Smie 3: Supernovaer',
+    question:
+      'Hvorfor spiller frie nøytroner hovedrollen når grunnstoffer tyngre enn jern bygges i supernovaeksplosjoner?',
+    options: [
+      'Fordi nøytroner er tusen ganger lettere enn elektroner og beveger seg baklengs i tid',
+      'Fordi nøytroner har sterk positiv ladning som trekker til seg alle protonene rundt',
+      'Fordi nøytroner bare finnes inne i hvite dverger på størrelse med Jorda',
+      'Fordi nøytroner er elektrisk nøytrale og derfor kan trenge rett inn i positivt ladde atomkjerner uten elektrisk frastøting',
+    ],
+    correctIndex: 3,
+    explanation:
+      'Siden nøytroner har ladning 0, frastøtes de ikke av de mange plussladde protonene i jernkjernen. Etter nøytronfangst omdannes nøytroner til protoner og øker atomnummeret!',
+  },
+  {
+    id: 'elem-mcq-9',
+    number: 9,
+    relatedStepIndex: 8,
+    topicBadge: 'Del 9 • Smie 4: Kilonova',
+    question:
+      'Hvilken ekstrem kosmisk hendelse er hovedkilden til mange av de aller tyngste grunnstoffene våre, som gull (Au), platina (Pt), jod (I) og uran (U)?',
+    options: [
+      'Små røde dvergstjerner som sakte kjøles ned over milliarder av år',
+      'Kollisjoner mellom kometer og asteroider i asteroidebeltet mellom Mars og Jupiter',
+      'Kollisjoner mellom to ultrakompakte nøytronstjerner (kilonova)',
+      'Solvind fra vanlige hovedseriestjerner som Sola',
+    ],
+    correctIndex: 2,
+    explanation:
+      'Når to nøytronstjerner kolliderer i en kilonova, kastes ekstremt nøytronrik materie ut og smir enorme mengder gull, platina, jod og uran på få sekunder!',
+  },
+  {
+    id: 'elem-mcq-10',
+    number: 10,
+    relatedStepIndex: 9,
+    topicBadge: 'Del 10 • Stjernestøv i oss',
+    question:
+      'Hvilke fire grunnstoffer utgjør til sammen rundt 96 % av massen i menneskekroppen – og hva har tre av dem til felles?',
+    options: [
+      'Oksygen, karbon, hydrogen og nitrogen – der O, C og N ble smidd i stjerner mens H stammer fra Big Bang',
+      'Jern, gull, uran og silisium – som alle stammer utelukkende fra Big Bang',
+      'Helium, neon, argon og krypton – som binder seg sammen i lange DNA-kjeder',
+      'Kalsium, bly, kvikksølv og litium – som lages i Jordas atmosfære av lynnedslag',
+    ],
+    correctIndex: 0,
+    explanation:
+      'Kroppen vår består av ca. 65 % oksygen, 18 % karbon, 10 % hydrogen og 3 % nitrogen: ur-hydrogen fra Big Bang kombinert med O, C og N smidd i stjerner!',
+  },
+];
+
+

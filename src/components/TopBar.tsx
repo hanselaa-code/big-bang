@@ -89,7 +89,7 @@ export function TopBar({
       {/* Left: Brand & Interactive Theme Switcher Dropdown */}
       <div
         ref={dropdownRef}
-        className="relative flex items-center gap-2 sm:gap-2.5 min-w-0"
+        className="relative flex items-center gap-2 sm:gap-2.5 min-w-0 flex-1"
       >
         <button
           id="btn-theme-switcher"
@@ -98,7 +98,7 @@ export function TopBar({
           aria-expanded={themeMenuOpen}
           aria-haspopup="listbox"
           title="Velg tema eller gå til tankekartet"
-          className="group flex items-center gap-2.5 sm:gap-3 px-2 sm:px-3 py-1.5 rounded-2xl bg-slate-900/85 hover:bg-slate-800/90 border border-amber-400/35 hover:border-amber-400/65 transition-all cursor-pointer min-w-0 text-left shadow-[0_0_24px_rgba(245,158,11,0.12)]"
+          className="group flex items-center gap-2.5 sm:gap-3 px-2 sm:px-3 py-1.5 rounded-2xl bg-slate-900/85 hover:bg-slate-800/90 border border-amber-400/35 hover:border-amber-400/65 transition-all cursor-pointer min-w-0 sm:shrink-0 text-left shadow-[0_0_24px_rgba(245,158,11,0.12)]"
         >
           <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-amber-500/25 to-sky-500/20 border border-amber-400/35 flex items-center justify-center shrink-0">
             <ActiveIcon className="w-4 h-4 sm:w-5 sm:h-5 text-amber-300" />

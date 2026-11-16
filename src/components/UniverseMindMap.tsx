@@ -44,14 +44,22 @@ export function UniverseMindMap({ onSelectTheme }: UniverseMindMapProps) {
               className="font-bold text-amber-300 hover:text-amber-200 underline underline-offset-2 cursor-pointer"
             >
               Big Bang
-            </button>{' '}
-            og{' '}
+            </button>
+            ,{' '}
             <button
               type="button"
               onClick={() => onSelectTheme('stjerner')}
               className="font-bold text-sky-300 hover:text-sky-200 underline underline-offset-2 cursor-pointer"
             >
               Stjerner
+            </button>{' '}
+            og{' '}
+            <button
+              type="button"
+              onClick={() => onSelectTheme('grunnstoffer')}
+              className="font-bold text-teal-300 hover:text-teal-200 underline underline-offset-2 cursor-pointer"
+            >
+              Grunnstoffer
             </button>{' '}
             er klare!
           </span>
