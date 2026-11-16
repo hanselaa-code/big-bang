@@ -182,3 +182,177 @@ export const BIG_BANG_MCQ_QUESTIONS: McqQuestionItem[] = [
       'Alt av atomer, stjerner, gasskyer, planeter og liv utgjør bare rundt 5 % av universet! Resten er ca. 27 % mørk materie og ca. 68 % mørk energi som får utvidelsen til å akselerere.',
   },
 ];
+
+export const STARS_MCQ_QUESTIONS: McqQuestionItem[] = [
+  {
+    id: 'star-mcq-1',
+    number: 1,
+    relatedStepIndex: 0,
+    topicBadge: 'Steg 1 • Stjernetåke',
+    question:
+      'Hvorfor må gass- og støvskyen i en stjernetåke være svært kald (10–100 K) for at en ny stjerne skal kunne begynne å dannes?',
+    options: [
+      'Fordi kjernefusjon av hydrogen bare kan starte ved temperaturer under frysepunktet',
+      'Fordi lav temperatur gir lavt gasstrykk utover, slik at tyngdekraften klarer å trekke gassen sammen',
+      'Fordi mørk energi bare finnes inne i kalde skyer i Melkeveien',
+      'Fordi varme gasskyer umiddelbart fryser til isplaneter før det rekker å bli en stjerne',
+    ],
+    correctIndex: 1,
+    explanation:
+      'I varm gass har partiklene så høy fart at gasstrykket presser skyen fra hverandre. Først når gassen er iskald, vinner tyngdekraften slik at skyen kan kollapse.',
+  },
+  {
+    id: 'star-mcq-2',
+    number: 2,
+    relatedStepIndex: 1,
+    topicBadge: 'Steg 2 • Protostjerne',
+    question:
+      'Hva er hovedforskjellen på en protostjerne og en ferdig hovedseriestjerne som Sola?',
+    options: [
+      'En protostjerne består utelukkende av jern og nikkel, mens en stjerne består av oksygen',
+      'En protostjerne har ingen tyngdekraft før planetene rundt den er ferdig dannet',
+      'En protostjerne er en utbrent rest etter en supernovaeksplosjon',
+      'En protostjerne lyser av varme fra gravitasjonskompresjon, men kjernen er ennå ikke varm nok til å fusjonere vanlig hydrogen til helium',
+    ],
+    correctIndex: 3,
+    explanation:
+      'Protostjernen varmes opp når gassen klemmes sammen av tyngdekraften, men den blir først en ekte hovedseriestjerne når kjernetemperaturen når ca. 10–15 millioner K og hydrogenfusjonen tenner.',
+  },
+  {
+    id: 'star-mcq-3',
+    number: 3,
+    relatedStepIndex: 2,
+    topicBadge: 'Steg 3 • Hovedseriestjerne & balanse',
+    question:
+      'Hvilke to krefter holder en hovedseriestjerne (som Sola) i stabil hydrostatisk likevekt gjennom milliarder av år?',
+    options: [
+      'Tyngdekraften som trekker innover og strålings-/gasstrykket fra kjernefusjonen som presser utover',
+      'Magnetfeltet fra planetene utover og solvinden innover',
+      'Sentrifugalkraften fra Melkeveien og kosmisk bakgrunnsstråling utenfra',
+      'Kjemisk forbrenning av oksygen i kjernen og kulde fra verdensrommet',
+    ],
+    correctIndex: 0,
+    explanation:
+      'Så lenge hydrogen fusjonerer til helium i kjernen, balanserer det enorme trykket utover nøyaktig tyngdekraften som trekker alle gasslagene innover.',
+  },
+  {
+    id: 'star-mcq-4',
+    number: 4,
+    relatedStepIndex: 2,
+    topicBadge: 'Steg 3 • Farge, temperatur og levetid',
+    question:
+      'Hvilken sammenheng gjelder for stjerner på hovedserien når vi sammenligner farge, overflatetemperatur og levetid?',
+    options: [
+      'Røde stjerner er varmest på overflaten og lever kortest av alle stjerner',
+      'Alle stjerner har nøyaktig samme overflatetemperatur, men får ulik farge av støv i rommet',
+      'Tunge blåhvite stjerner er varmest på overflaten (> 25 000 K), men brenner opp drivstoffet raskest og lever kortest',
+      'Gule stjerner som Sola er tyngst i universet og lever bare i noen få tusen år',
+    ],
+    correctIndex: 2,
+    explanation:
+      'Blåhvite hovedseriestjerner har størst masse og høyest temperatur, men den voldsomme tyngdekraften tvinger dem til å fusjonere drivstoffet i rekordfart – så de lever bare noen få millioner år!',
+  },
+  {
+    id: 'star-mcq-5',
+    number: 5,
+    relatedStepIndex: 3,
+    topicBadge: 'Steg 4 • Rød kjempe (Øvre gren)',
+    question:
+      'Hva skjer med Sola om rundt 5 milliarder år når hydrogenet innerst i kjernen er brukt opp?',
+    options: [
+      'Den slukner på ett sekund og blir direkte til et sort hull',
+      'Kjernen trekker seg sammen og blir varm nok til å fusjonere helium til karbon, mens ytterlagene eser ut til en rød kjempe',
+      'Den deler seg i to mindre gule stjerner som fortsetter å lyse evig',
+      'Den eksploderer som en supernova og danner en ny nøytronstjerne',
+    ],
+    correctIndex: 1,
+    explanation:
+      'Når hydrogenet i kjernen tar slutt, krymper kjernen til heliumfusjon tenner (~100 mill. K), mens skallfusjon presser ytterlagene opp til en enorm, kjøligere rød kjempe.',
+  },
+  {
+    id: 'star-mcq-6',
+    number: 6,
+    relatedStepIndex: 5,
+    topicBadge: 'Steg 5–6 • Planetarisk tåke & Hvit dverg',
+    question:
+      'Hvordan ender livet for en stjerne på størrelse med Sola etter fasen som rød kjempe?',
+    options: [
+      'Den fusjonerer karbon videre til jern og gull før den eksploderer som supernova',
+      'Den fryser til en kjempeplanet av stein og is på størrelse med Jupiter',
+      'Den kollapser til et supermassivt sort hull i sentrum av Solsystemet',
+      'Den blåser ytterlagene rolig ut som en planetarisk tåke, mens den tette kjernen blir igjen som en hvit dverg på størrelse med Jorda',
+    ],
+    correctIndex: 3,
+    explanation:
+      'Sol-lignende stjerner (< 8 solmasser) er for lette til å eksplodere som supernova. De kaster ytterkappen som en planetarisk tåke og etterlater en glødende hvit dverg uten fusjon.',
+  },
+  {
+    id: 'star-mcq-7',
+    number: 7,
+    relatedStepIndex: 6,
+    topicBadge: 'Steg 7 • Rød superkjempe & Jernkjernen',
+    question:
+      'Hvorfor stopper fusjonsmotoren brått når en tung rød superkjempe har bygd opp en kjerne av jern (Fe, atomnummer 26)?',
+    options: [
+      'Fordi fusjon av jern ikke frigjør energi, men krever tilført energi – dermed forsvinner strålingstrykket utover',
+      'Fordi jern er magnetisk og skyver alle de andre lagene i stjernen rolig vekk',
+      'Fordi jern umiddelbart fordamper til rent hydrogen igjen ved høyt trykk',
+      'Fordi det ikke finnes nok nøytroner i universet til å lage grunnstoffer med høyere nummer enn 26',
+    ],
+    correctIndex: 0,
+    explanation:
+      'Jern har den tettest bundne atomkjernen. Alle fusjoner opp til jern gir energioverskudd, men å fusjonere jern videre sluker energi – så motoren mister trykket på under ett sekund!',
+  },
+  {
+    id: 'star-mcq-8',
+    number: 8,
+    relatedStepIndex: 7,
+    topicBadge: 'Steg 8 • Supernova',
+    question:
+      'Hvilken helt avgjørende rolle spiller supernovaeksplosjoner for at planeter som Jorda og liv skal kunne eksistere?',
+    options: [
+      'De skaper alt hydrogenet i universet fra ingenting',
+      'De kjøler ned verdensrommet til 2,725 K slik at bakgrunnsstrålingen oppstår',
+      'De både smir grunnstoffer tyngre enn jern og slynger grunnstoffene fra stjernens indre ut i rommet til nye solsystemer',
+      'De hindrer alle gasskyer i galaksen fra å trekke seg sammen til nye stjerner',
+    ],
+    correctIndex: 2,
+    explanation:
+      'Supernovaer smir tunge grunnstoffer (som kobber, jod og uran) og sprer samtidig karbonet, oksygenet, silisiumet og jernet som den tunge stjernen bygde opp før den døde.',
+  },
+  {
+    id: 'star-mcq-9',
+    number: 9,
+    relatedStepIndex: 8,
+    topicBadge: 'Steg 9 • Nøytronstjerne & Pulsar',
+    question:
+      'Hva kjennetegner en nøytronstjerne som blir igjen etter en supernova fra en stjerne på ca. 8–20 solmasser?',
+    options: [
+      'En kald gasskule som er hundre ganger større enn Sola, men nesten vektløs',
+      'En vanlig steinplanet uten tyngdekraft som svever fritt mellom galaksene',
+      'En sky av frittflygende elektroner uten noen kjerne i midten',
+      'En ekstremt tett kule på bare ~20 km i diameter med mer masse enn Sola, som ofte spinner raskt som en pulsar',
+    ],
+    correctIndex: 3,
+    explanation:
+      'Under kollapsen presses protoner og elektroner sammen til nøytroner. Over én solmasse pakkes inn på ~20 km (som en by!), slik at én teskje veier rundt en milliard tonn.',
+  },
+  {
+    id: 'star-mcq-10',
+    number: 10,
+    relatedStepIndex: 9,
+    topicBadge: 'Steg 10 • Sort hull',
+    question:
+      'Når ender en døende stjerne som et stellart sort hull, og hva menes med «hendelseshorisonten»?',
+    options: [
+      'Når alle stjerner under 1 solmasse går tomme for helium i kjernen',
+      'Når de aller tyngste stjernene (> 20–25 solmasser) kollapser slik at ingenting stopper tyngdekraften, og hendelseshorisonten er grensen der selv ikke lys slipper ut',
+      'Når en planetarisk tåke fryser til is ytterst i Solsystemet',
+      'Når et sort hull suger inn alle galakser i hele universet som en støvsuger uansett avstand',
+    ],
+    correctIndex: 1,
+    explanation:
+      'Er restkjernen over ~3 solmasser, klarer selv ikke nøytrontrykket å stoppe kollapsen. Innenfor hendelseshorisonten overstiger unnslipningsfarten lysfarten c!',
+  },
+];
+

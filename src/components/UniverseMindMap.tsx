@@ -37,7 +37,7 @@ export function UniverseMindMap({ onSelectTheme }: UniverseMindMapProps) {
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 border border-slate-700/75 text-[11px] sm:text-xs text-slate-300 shadow-lg">
           <Sparkles className="w-3.5 h-3.5 text-amber-300 shrink-0" />
           <span>
-            Trykk på en sirkel i tankekartet for å utforske temaet —{' '}
+            Trykk på en sirkel i tankekartet —{' '}
             <button
               type="button"
               onClick={() => onSelectTheme('big-bang')}
@@ -45,7 +45,15 @@ export function UniverseMindMap({ onSelectTheme }: UniverseMindMapProps) {
             >
               Big Bang
             </button>{' '}
-            er klar!
+            og{' '}
+            <button
+              type="button"
+              onClick={() => onSelectTheme('stjerner')}
+              className="font-bold text-sky-300 hover:text-sky-200 underline underline-offset-2 cursor-pointer"
+            >
+              Stjerner
+            </button>{' '}
+            er klare!
           </span>
         </div>
       </div>

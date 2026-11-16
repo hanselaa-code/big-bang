@@ -53,14 +53,14 @@ export const UNIVERSE_HUB_NODES: UniverseHubNode[] = [
   {
     id: 'stjerner',
     title: 'Stjerner',
-    badge: 'Kommer snart',
+    badge: 'Forgrenet livsløp • Masse avgjør skjebnen',
     shortDescription:
       'Stjerners fødsel i gasskyer, fusjon i stjernekjernen, livsløp og supernovaeksplosjoner.',
     imageUrl: cosmosImg('hub_stjerner.jpg'),
     cx: 845,
     cy: 145,
     r: 98,
-    linkedThemeId: null,
+    linkedThemeId: 'stjerner',
   },
   {
     id: 'grunnstoffer',
