@@ -1,4 +1,5 @@
 import {
+  BookOpen,
   Clock,
   FlaskConical,
   Lightbulb,
@@ -6,8 +7,11 @@ import {
   Sparkles,
   Tag,
   Thermometer,
+  X,
 } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import type { CosmicNodeData } from '../data/bigBangData';
+import { getTermDefinition } from '../data/termGlossary';
 import type { ThemeConfig } from '../data/themes';
 import { NodeVideoPlayer } from './NodeVideoPlayer';
 import { TraitIcon } from './TraitIcon';
@@ -23,6 +27,12 @@ export function InfoPanel({
   node,
   onOpenLightbox,
 }: InfoPanelProps) {
+  const [activeTerm, setActiveTerm] = useState<string | null>(null);
+
+  useEffect(() => {
+    setActiveTerm(null);
+  }, [node.id]);
+
   return (
     <aside
       key={node.id}
@@ -167,21 +177,71 @@ export function InfoPanel({
           </p>
         </section>
 
-        {/* Nøkkelbegreper */}
-        <section className="space-y-2 pb-1">
-          <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-400">
-            <Tag className="w-3.5 h-3.5" />
-            <h3>{activeTheme.examplesHeading}</h3>
+        {/* Nøkkelbegreper (klikkbar ordbok) */}
+        <section className="space-y-2.5 pb-1">
+          <div className="flex items-center justify-between gap-2 flex-wrap">
+            <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-400">
+              <Tag className="w-3.5 h-3.5" />
+              <h3>{activeTheme.examplesHeading}</h3>
+            </div>
+            <span className="inline-flex items-center gap-1 text-[11px] text-sky-300/85 font-medium">
+              <BookOpen className="w-3 h-3" />
+              Trykk for ordbok-forklaring
+            </span>
           </div>
+
+          {activeTerm && (
+            <div
+              role="dialog"
+              aria-label={`Ordbok: ${activeTerm}`}
+              className="p-3.5 rounded-xl bg-slate-900/95 border border-sky-400/50 shadow-[0_10px_30px_rgba(2,132,199,0.22)] space-y-1.5 animate-card-enter"
+            >
+              <div className="flex items-start justify-between gap-2">
+                <div className="flex items-center gap-2 min-w-0">
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-sky-500/20 border border-sky-400/35 text-sky-200 text-[10px] font-bold uppercase tracking-wider shrink-0">
+                    <BookOpen className="w-3 h-3" />
+                    Ordbok
+                  </span>
+                  <h4 className="text-sm font-extrabold text-white truncate">
+                    {activeTerm}
+                  </h4>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setActiveTerm(null)}
+                  aria-label="Lukk begrepsforklaring"
+                  className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer shrink-0"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+              <p className="text-xs lg:text-sm text-slate-200 leading-relaxed">
+                {getTermDefinition(activeTerm)}
+              </p>
+            </div>
+          )}
+
           <div className="flex flex-wrap gap-1.5">
-            {node.examples.map((example) => (
-              <span
-                key={example}
-                className="px-2.5 py-1 rounded-lg bg-slate-800/90 border border-slate-700/80 text-xs lg:text-sm text-slate-200 font-medium"
-              >
-                {example}
-              </span>
-            ))}
+            {node.examples.map((example) => {
+              const isSelected = activeTerm === example;
+              return (
+                <button
+                  key={example}
+                  type="button"
+                  aria-expanded={isSelected}
+                  onClick={() =>
+                    setActiveTerm((prev) => (prev === example ? null : example))
+                  }
+                  className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-xs lg:text-sm font-medium transition-all cursor-pointer text-left ${
+                    isSelected
+                      ? 'bg-sky-500/25 border-sky-400 text-white shadow-[0_0_14px_rgba(56,189,248,0.28)]'
+                      : 'bg-slate-800/90 hover:bg-slate-700/90 border-slate-700/80 hover:border-sky-400/55 text-slate-200 hover:text-white'
+                  }`}
+                >
+                  <span>{example}</span>
+                </button>
+              );
+            })}
           </div>
         </section>
       </div>
