@@ -15,10 +15,17 @@ import {
 import {
   BIG_BANG_MCQ_QUESTIONS,
   ELEMENTS_MCQ_QUESTIONS,
+  RADIATION_MCQ_QUESTIONS,
   SPACETIME_MCQ_QUESTIONS,
   STARS_MCQ_QUESTIONS,
   type McqQuestionItem,
 } from './mcqQuestionsData';
+import {
+  RADIATION_CONTROL_QUESTIONS,
+  RADIATION_MAIN_STEP_IDS,
+  RADIATION_NODE_MAP,
+  RADIATION_NODES,
+} from './radiationData';
 import {
   SPACETIME_CONTROL_QUESTIONS,
   SPACETIME_MAIN_STEP_IDS,
@@ -32,7 +39,12 @@ import {
   STARS_NODES,
 } from './starsData';
 
-export type ThemeId = 'big-bang' | 'stjerner' | 'grunnstoffer' | 'romtid';
+export type ThemeId =
+  | 'big-bang'
+  | 'stjerner'
+  | 'grunnstoffer'
+  | 'straling'
+  | 'romtid';
 export type AppView = 'universet' | ThemeId;
 
 export interface ThemeConfig {
@@ -168,6 +180,43 @@ export const THEMES: Record<ThemeId, ThemeConfig> = {
     ],
   },
 
+  straling: {
+    id: 'straling',
+    hash: '#straling',
+    title: 'Stråling – Bølgespekteret, stjernelysets kode, CMB og Jordas atmosfære',
+    dropdownTitle: 'Stråling – Spekter, CMB & klima',
+    dropdownBadge: 'Bølgespekteret • Radio → Gamma & CMB',
+    dropdownDescription:
+      'Utforsk elektromagnetiske bølger og fotoner, ioniserende vs. ikke-ioniserende stråling, spektrallinjer, rødforskyvning, bakgrunnsstrålingen (CMB) og drivhuseffekten.',
+    subtitle:
+      'Interaktivt bølgespekter • Fra fotoner og spektrallinjer til kosmisk bakgrunnsstråling og drivhuseffekt (Vg1 Naturfag)',
+    stepWord: 'Steg',
+    showAllLabel: 'Vis hele bølgespekteret',
+    progressiveLabel: 'Stegvis modus',
+    quizTitle:
+      'Kontrollspørsmål: Elektromagnetisk stråling, spekter, CMB & atmosfæren',
+    backFromQuizLabel: 'Tilbake til bølgespekteret',
+    summaryHeadingPrefix: 'Hva skjer med strålingen?',
+    traitsHeading: 'Fysiske mekanismer og nøkkelpunkter',
+    classroomBoxHeading: 'Klasseromstriks & forsøk',
+    examplesHeading: 'Nøkkelbegreper på dette steget',
+    mainStepIds: RADIATION_MAIN_STEP_IDS,
+    allNodes: RADIATION_NODES,
+    nodeMap: RADIATION_NODE_MAP,
+    controlQuestions: RADIATION_CONTROL_QUESTIONS,
+    mcqQuestions: RADIATION_MCQ_QUESTIONS,
+    quizShortcuts: [
+      { label: 'Steg 1: Bølger & fotoner (c = λ·f)', idx: 0 },
+      { label: 'Steg 2: Radio- & mikrobølger', idx: 1 },
+      { label: 'Steg 3: Infrarød & synlig lys', idx: 2 },
+      { label: 'Steg 4: Ioniserende (UV, røntgen, gamma)', idx: 3 },
+      { label: 'Steg 5: Stjernefarge & temperatur', idx: 4 },
+      { label: 'Steg 6–7: Spektrallinjer & rødforskyvning', idx: 6 },
+      { label: 'Steg 8: Bakgrunnsstrålingen (CMB)', idx: 7 },
+      { label: 'Steg 9–10: Ozonlag & drivhuseffekt', idx: 9 },
+    ],
+  },
+
   romtid: {
     id: 'romtid',
     hash: '#romtid',
@@ -209,11 +258,12 @@ export const THEME_LIST: ThemeConfig[] = [
   THEMES['big-bang'],
   THEMES.stjerner,
   THEMES.grunnstoffer,
+  THEMES.straling,
   THEMES.romtid,
 ];
 
 export function parseViewFromHash(hash: string): AppView {
-  const clean = hash.replace(/^#/, '').trim().toLowerCase();
+  const clean = decodeURIComponent(hash.replace(/^#/, '').trim().toLowerCase());
   if (clean === 'big-bang' || clean === 'tidslinje') {
     return 'big-bang';
   }
@@ -226,6 +276,13 @@ export function parseViewFromHash(hash: string): AppView {
     clean === 'elements'
   ) {
     return 'grunnstoffer';
+  }
+  if (
+    clean === 'straling' ||
+    clean === 'stråling' ||
+    clean === 'radiation'
+  ) {
+    return 'straling';
   }
   if (clean === 'romtid' || clean === 'spacetime') {
     return 'romtid';

@@ -6,6 +6,7 @@ import { ImageLightbox } from './components/ImageLightbox';
 import { InfoPanel } from './components/InfoPanel';
 import { QrShareModal } from './components/QrShareModal';
 import { QuizModal } from './components/QuizModal';
+import { RadiationExplorer } from './components/RadiationExplorer';
 import { SpacetimeExplorer } from './components/SpacetimeExplorer';
 import { StarsBranchingTimeline } from './components/StarsBranchingTimeline';
 import { TimelineDock } from './components/TimelineDock';
@@ -421,6 +422,14 @@ export function App() {
               )}
               {activeThemeId === 'grunnstoffer' && (
                 <ElementsExplorer
+                  unlockedStepIndex={unlockedStepIndex}
+                  showAllSteps={showAllSteps}
+                  selectedNodeId={selectedNodeId}
+                  onSelectNode={handleSelectNode}
+                />
+              )}
+              {activeThemeId === 'straling' && (
+                <RadiationExplorer
                   unlockedStepIndex={unlockedStepIndex}
                   showAllSteps={showAllSteps}
                   selectedNodeId={selectedNodeId}

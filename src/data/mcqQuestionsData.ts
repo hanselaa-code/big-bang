@@ -701,3 +701,177 @@ export const SPACETIME_MCQ_QUESTIONS: McqQuestionItem[] = [
       'Mørk materie bidrar med ekstra tiltrekkende gravitasjonsbrønner rundt galaksene, mens mørk energi driver den akselererende utvidelsen av tomrommet mellom galaksehopene!',
   },
 ];
+
+export const RADIATION_MCQ_QUESTIONS: McqQuestionItem[] = [
+  {
+    id: 'rad-mcq-1',
+    number: 1,
+    relatedStepIndex: 0,
+    topicBadge: 'Steg 1 • Bølger & fotoner (c = λ · f)',
+    question:
+      'Hva skjer med frekvensen og energien til hvert foton når bølgelengden til elektromagnetisk stråling blir kortere?',
+    options: [
+      'Frekvensen øker, og energien i hvert enkelt foton øker',
+      'Frekvensen minker, og lyset beveger seg langsommere i vakuum',
+      'Både frekvensen og energien i hvert foton blir halvert',
+      'Frekvensen er uendret fordi kun lydbølger har frekvens',
+    ],
+    correctIndex: 0,
+    explanation:
+      'Siden alt lys i vakuum reiser med samme fart (c = λ · f), gir kortere bølgelengde (λ) automatisk høyere frekvens (f) og mer energi i hvert foton!',
+  },
+  {
+    id: 'rad-mcq-2',
+    number: 2,
+    relatedStepIndex: 1,
+    topicBadge: 'Steg 2 • Radio- & mikrobølger',
+    question:
+      'Hvorfor regnes radiobølger og mikrobølger (f.eks. fra mobilnett, Wi-Fi og radioteleskoper) som ikke-ioniserende stråling?',
+    options: [
+      'Fordi radiobølger trenger luft for å bevege seg og stopper ved bakken',
+      'Fordi bølgelengden er så lang at hvert enkelt foton har altfor lav energi til å slå løs elektroner i atomer eller skade DNA direkte',
+      'Fordi radiobølger beveger seg tusen ganger saktere enn synlig lys',
+      'Fordi radiobølger bare består av nøytroner uten elektrisk felt',
+    ],
+    correctIndex: 1,
+    explanation:
+      'Lang bølgelengde betyr lav frekvens og svært lav fotonenergi – strålingen kan gi oppvarming ved høy effekt, men kan ikke ionisere atomer eller klippe DNA-tråder.',
+  },
+  {
+    id: 'rad-mcq-3',
+    number: 3,
+    relatedStepIndex: 2,
+    topicBadge: 'Steg 3 • Infrarød & Synlig lys',
+    question:
+      'Hvorfor er James Webb-romteleskopet spesiallaget for å observere infrarød stråling i stedet for bare vanlig synlig lys?',
+    options: [
+      'Fordi det ikke finnes stjerner i universet som sender ut synlig lys',
+      'Fordi infrarøde bølger reiser dobbelt så raskt gjennom rommet som blått lys',
+      'Fordi lengre infrarøde bølger slipper gjennom tette støvskyer og fanger opp sterkt rødforskjøvet lys fra de aller første galaksene',
+      'Fordi infrarød stråling er den mest ioniserende strålingen i spekteret',
+    ],
+    correctIndex: 2,
+    explanation:
+      'Infrarødt lys smetter forbi kosmiske støvkorn som blokkerer synlig lys, og fanger i tillegg opp lyset fra uruniversets galakser som er strukket over i IR!',
+  },
+  {
+    id: 'rad-mcq-4',
+    number: 4,
+    relatedStepIndex: 3,
+    topicBadge: 'Steg 4 • Ioniserende stråling',
+    question:
+      'Hvilke tre typer stråling i det elektromagnetiske spekteret har kortest bølgelengde og er ioniserende?',
+    options: [
+      'Radiobølger, mikrobølger og infrarød varmestråling',
+      'Rødt lys, gult lys og grønt lys',
+      'Lydbølger, vannbølger og radiobølger',
+      'Kortbølget ultrafiolett (UV), røntgenstråling og gammastråling',
+    ],
+    correctIndex: 3,
+    explanation:
+      'Fra kortbølget UV gjennom røntgen til gammastråling har hvert enkelt foton høy nok energi til å rive løs elektroner fra atomer (ionisere) og endre DNA.',
+  },
+  {
+    id: 'rad-mcq-5',
+    number: 5,
+    relatedStepIndex: 4,
+    topicBadge: 'Steg 5 • Temperaturstråling',
+    question:
+      'På nattehimmelen ser vi en rød-oransje stjerne og en blåhvit stjerne. Hvilken av dem har høyest overflatetemperatur?',
+    options: [
+      'Den rød-oransje stjernen er alltid varmest, akkurat som rød merking på vannkrana',
+      'Den blåhvite stjernen er klart varmest, fordi høyere temperatur forskyver strålingstoppen mot kortere, blåere bølgelengder',
+      'Alle stjerner har nøyaktig samme overflatetemperatur på 5 800 kelvin',
+      'Fargen avhenger bare av hvor mye oksygengass stjernen har rundt seg',
+    ],
+    correctIndex: 1,
+    explanation:
+      'Etter Wiens forskyvningslov gløder kjøligere stjerner (~3 200 K) rødt, Sola (~5 800 K) gulhvitt, og de aller varmeste stjernene (> 12 000–25 000 K) blåhvitt!',
+  },
+  {
+    id: 'rad-mcq-6',
+    number: 6,
+    relatedStepIndex: 5,
+    topicBadge: 'Steg 6 • Spektrallinjer',
+    question:
+      'Hva skyldes de mørke absorpsjonslinjene (Fraunhofer-linjene) i regnbuespekteret fra en stjerne?',
+    options: [
+      'At elektroner i grunnstoffene i stjerneatmosfæren absorberer fotoner med helt bestemte bølgelengder for å hoppe opp til høyere elektronskall',
+      'At kosmiske støvkorn lager tilfeldige skygger som skifter plass hvert minutt',
+      'At teleskopspeilet mangler evnen til å reflektere grønt og gult lys',
+      'At sorte hull mellom oss og stjernen sluker annenhver farge i regnbuen',
+    ],
+    correctIndex: 0,
+    explanation:
+      'Hvert grunnstoff har unike energisprang mellom elektronskallene sine og etterlater derfor et unikt mønster av mørke linjer («strekkode») i stjernelyset.',
+  },
+  {
+    id: 'rad-mcq-7',
+    number: 7,
+    relatedStepIndex: 6,
+    topicBadge: 'Steg 7 • Doppler & Rødforskyvning',
+    question:
+      'Astronomer ser at hele mønsteret av spektrallinjer fra Andromedagalaksen er litt blåforskjøvet, mens fjerne galakser er sterkt rødforskjøvet. Hva betyr det?',
+    options: [
+      'At Andromedagalaksen mangler hydrogen, mens fjerne galakser bare består av jern',
+      'At Andromedagalaksen er på vei bort fra oss, mens fjerne galakser står helt stille',
+      'At Andromedagalaksen beveger seg mot Melkeveien, mens de fjerne galaksene fjerner seg fordi rommet utvider seg',
+      'At lyset fra Andromedagalaksen går raskere enn 300 000 km/s',
+    ],
+    correctIndex: 2,
+    explanation:
+      'Bevegelse mot oss presser lysbølgene sammen (blåforskyvning), mens rommets utvidelse strekker lysbølgene fra fjerne galakser mot lengre bølgelengder (rødforskyvning).',
+  },
+  {
+    id: 'rad-mcq-8',
+    number: 8,
+    relatedStepIndex: 7,
+    topicBadge: 'Steg 8 • Kosmisk bakgrunnsstråling (CMB)',
+    question:
+      'Hvorfor fanger vi opp den kosmiske bakgrunnsstrålingen fra det tidlige universet som kalde mikrobølger (2,725 K) i dag?',
+    options: [
+      'Fordi universet var 2,725 K kaldt allerede ett sekund etter Big Bang',
+      'Fordi strålingen ble sendt ut av moderne radioteleskoper på Jorda',
+      'Fordi ozonlaget gjør alt synlig stjernelys om til mikrobølger',
+      'Fordi varmelyset fra da universet ble gjennomsiktig ved ~3 000 K har blitt strukket ~1 100 ganger i bølgelengde av rommets utvidelse',
+    ],
+    correctIndex: 3,
+    explanation:
+      'Ved t = 380 000 år slapp varmestrålingen ved 3 000 K fri da de første atomene ble dannet; 13,8 milliarder års kosmisk utvidelse har strukket bølgene 1 100 ganger til mikrobølger!',
+  },
+  {
+    id: 'rad-mcq-9',
+    number: 9,
+    relatedStepIndex: 8,
+    topicBadge: 'Steg 9 • Atmosfærens skjold & vinduer',
+    question:
+      'Hvilke to typer elektromagnetisk stråling slipper lettest helt ned til bakken gjennom Jordas «atmosfæriske vinduer»?',
+    options: [
+      'Gammastråling og røntgenstråling',
+      'Synlig lys og radiobølger',
+      'Kortbølget UV-C og røntgenstråling',
+      'Kun gammastråling fra fjerne pulsarer',
+    ],
+    correctIndex: 1,
+    explanation:
+      'Atmosfæren og ozonlaget stopper heldigvis gamma, røntgen og UV-C, men slipper gjennom synlig lys og radiobølger – derfor må røntgen- og gammateleskoper opp i verdensrommet!',
+  },
+  {
+    id: 'rad-mcq-10',
+    number: 10,
+    relatedStepIndex: 9,
+    topicBadge: 'Steg 10 • Strålingsbalanse & Drivhus',
+    question:
+      'Hva er selve kjernen i drivhuseffekten ut fra det elektromagnetiske spekteret?',
+    options: [
+      'Drivhusgassene (som H₂O, CO₂ og CH₄) slipper kortbølget synlig sollys inn, men absorberer og holder igjen deler av den utgående langbølgede infrarøde varmestrålingen fra Jorda',
+      'Drivhusgassene slipper bare inn røntgenstråling fra Sola og gjør den om til radiobølger',
+      'Ozonlaget reflekterer 100 % av alt synlig sollys tilbake til verdensrommet',
+      'Nitrogen (N₂) og oksygen (O₂) fanger opp all gammastråling fra jordskorpa',
+    ],
+    correctIndex: 0,
+    explanation:
+      'Sola (5 800 K) stråler mest i kortbølget synlig lys som går gjennom lufta og varmer bakken, mens den lunkne Jorda (~288 K) stråler ut langbølget IR som absorberes av drivhusgasser!',
+  },
+];
+

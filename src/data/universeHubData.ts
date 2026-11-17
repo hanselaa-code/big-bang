@@ -77,14 +77,14 @@ export const UNIVERSE_HUB_NODES: UniverseHubNode[] = [
   {
     id: 'straling',
     title: 'Stråling',
-    badge: 'Kommer snart',
+    badge: 'Bølgespekteret • EM-bølger, spekter & CMB',
     shortDescription:
       'Elektromagnetisk stråling, bølgelengde, spekter, rødforskyvning og den kosmiske bakgrunnsstrålingen.',
     imageUrl: cosmosImg('hub_straling.jpg'),
     cx: 925,
     cy: 405,
     r: 98,
-    linkedThemeId: null,
+    linkedThemeId: 'straling',
   },
   {
     id: 'galakser',

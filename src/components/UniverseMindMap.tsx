@@ -60,6 +60,14 @@ export function UniverseMindMap({ onSelectTheme }: UniverseMindMapProps) {
               className="font-bold text-teal-300 hover:text-teal-200 underline underline-offset-2 cursor-pointer"
             >
               Grunnstoffer
+            </button>
+            ,{' '}
+            <button
+              type="button"
+              onClick={() => onSelectTheme('straling')}
+              className="font-bold text-rose-300 hover:text-rose-200 underline underline-offset-2 cursor-pointer"
+            >
+              Stråling
             </button>{' '}
             og{' '}
             <button
