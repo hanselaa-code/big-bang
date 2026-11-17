@@ -875,3 +875,177 @@ export const RADIATION_MCQ_QUESTIONS: McqQuestionItem[] = [
   },
 ];
 
+export const GALAXIES_MCQ_QUESTIONS: McqQuestionItem[] = [
+  {
+    id: 'gal-mcq-1',
+    number: 1,
+    relatedStepIndex: 0,
+    topicBadge: 'Steg 1 • Stjerneøyer i rommet',
+    question:
+      'Hva beviste Edwin Hubble i 1924 da han målte avstanden til Andromedatåken?',
+    options: [
+      'At Andromedatåken var en liten gassky inne i vårt eget solsystem rett utenfor Neptun',
+      'At Andromedatåken var en egen, gigantisk galakse millioner av lysår utenfor Melkeveien',
+      'At Melkeveien kun inneholder rundt tusen stjerner til sammen',
+      'At det ikke finnes gass eller støv mellom stjernene i en galakse',
+    ],
+    correctIndex: 1,
+    explanation:
+      'Hubbles avstandsmåling med kefeide-stjerner viste at «spiraltåkene» var egne galakser langt utenfor Melkeveien – og åpnet døren til et univers med tusenvis av milliarder galakser!',
+  },
+  {
+    id: 'gal-mcq-2',
+    number: 2,
+    relatedStepIndex: 1,
+    topicBadge: 'Steg 2 • Melkeveien',
+    question:
+      'Hvilken galaksetype er Melkeveien, og omtrent hvor i galaksen ligger Solsystemet vårt?',
+    options: [
+      'En stavspiralgalakse (~100 000 lysår bred), med Sola i en spiralarm rundt 26 000 lysår fra sentrum',
+      'En kuleformet ellipsegalakse der Sola ligger helt stille i det eksakte midtpunktet',
+      'En liten uregelmessig dverggalakse med bare én million stjerner',
+      'En ring av steinplaneter uten stjerner eller interstellart støv',
+    ],
+    correctIndex: 0,
+    explanation:
+      'Melkeveien er en stavspiralgalakse med 100–400 milliarder stjerner, og Solsystemet ligger i Orion-armen omtrent halvveis ut fra sentrum (~26 000 lysår).',
+  },
+  {
+    id: 'gal-mcq-3',
+    number: 3,
+    relatedStepIndex: 2,
+    topicBadge: 'Steg 3 • Sagittarius A*',
+    question:
+      'Hvordan oppdaget astronomene det supermassive sorte hullet Sagittarius A* (~4,1 millioner solmasser) midt i Melkeveien?',
+    options: [
+      'Fordi det sorte hullet sender ut sterkere grønt lys enn alle andre stjerner på nattehimmelen',
+      'Ved å reise dit med romsonden Voyager 1 og ta nærbilder',
+      'Ved å bruke infrarøde teleskoper til å følge stjerner som suser i skarpe baner med enorm fart rundt et usynlig, kompakt punkt',
+      'Fordi det sluker tusenvis av planeter i Solsystemet vårt hvert eneste år',
+    ],
+    correctIndex: 2,
+    explanation:
+      'Infrarødt lys trenger gjennom støvskyene mot galaksesenteret og avslørte stjernebaner (som stjernen S2) rundt en usynlig masse på 4,1 millioner solmasser – senere også avbildet i radiobølger av EHT!',
+  },
+  {
+    id: 'gal-mcq-4',
+    number: 4,
+    relatedStepIndex: 3,
+    topicBadge: 'Steg 4 • Galaksetyper',
+    question:
+      'Hvorfor lyser armene i en spiralgalakse ofte blåhvitt, mens store ellipsegalakser gjerne har en jevn gulrød farge?',
+    options: [
+      'Fordi spiralgalakser er dekket av flytende vann og is',
+      'Fordi ellipsegalakser bare består av nøytroner uten elektroner',
+      'Fordi spiralgalakser alltid beveger seg mot Jorda, mens ellipsegalakser står i ro',
+      'Fordi spiralarmene har rikelig med kald gass som danner unge, brennhete blå stjerner, mens ellipsegalakser har lite gass og domineres av eldre, kjøligere gulrøde stjerner',
+    ],
+    correctIndex: 3,
+    explanation:
+      'Store blå stjerner lever svært kort, så blåhvite spiralarmer viser at nye stjerner fødes akkurat nå – mens gassfattige ellipsegalakser lyser med seiglivede gule og røde eldre stjerner.',
+  },
+  {
+    id: 'gal-mcq-5',
+    number: 5,
+    relatedStepIndex: 4,
+    topicBadge: 'Steg 5 • Galaksekollisjoner',
+    question:
+      'Hva skjer med enkeltstjernene når Melkeveien og Andromedagalaksen kolliderer om rundt 4,5 milliarder år?',
+    options: [
+      'Nesten ingen enkeltstjerner krasjer i hverandre fordi avstandene mellom stjernene er enorme, men gasskyene kolliderer og utløser kraftig stjernedannelse',
+      'Alle stjernene i begge galaksene knuses mot hverandre i løpet av noen få timer',
+      'Begge galaksene forsvinner sporløst uten at noen nye stjerner dannes',
+      'Stjernene stopper helt opp og legger seg på én rett linje',
+    ],
+    correctIndex: 0,
+    explanation:
+      'Stjerner er ørsmå sammenlignet med lysårene imellom dem, så stjernene glir forbi hverandre mens gasskyene komprimeres og galaksene etter hvert smelter sammen til en stor ellipsegalakse!',
+  },
+  {
+    id: 'gal-mcq-6',
+    number: 6,
+    relatedStepIndex: 5,
+    topicBadge: 'Steg 6 • Mørk materie-haloen',
+    question:
+      'Hva var det Vera Rubin oppdaget da hun målte rotasjonshastigheten til stjerner og gass ytterst i spiralgalakser?',
+    options: [
+      'At ytterkantene av alle galakser står helt stille uten å rotere',
+      'At stjernene ytterst beveger seg altfor raskt til at den synlige stjernemassen alene kan holde dem på plass – galaksene må ligge inni en enorm halo av mørk materie',
+      'At galakser bare inneholder synlige stjerner og overhodet ingen usynlig masse',
+      'At stjernene ytterst roterer raskere enn lysfarten c',
+    ],
+    correctIndex: 1,
+    explanation:
+      'De flate rotasjonskurvene viste at hver galakse er omgitt av en vidstrakt, usynlig glorie av mørk materie med omtrent fem ganger mer masse enn den vanlige materien!',
+  },
+  {
+    id: 'gal-mcq-7',
+    number: 7,
+    relatedStepIndex: 6,
+    topicBadge: 'Steg 7 • Kvasarer & AGN',
+    question:
+      'Hva er det som gjør en kvasar (aktiv galaksekjerne) i stand til å lyse sterkere enn en hel galakse med hundrevis av milliarder stjerner?',
+    options: [
+      'En enkelt vanlig hovedseriestjerne på størrelse med Sola',
+      'Reflektert sollys fra store isfjell ute i galaksens spiralarmer',
+      'Enorme mengder gass som virvler og varmes til millioner av grader i en akkresjonsskive utenfor et supermassivt sort hull',
+      'Lydbølger fra kolliderende steinplaneter i galaksens ytterkant',
+    ],
+    correctIndex: 2,
+    explanation:
+      'Når et supermassivt sort hull fôres med store gassmengder, gjør friksjon og magnetfelt i skiven utenfor hendelseshorisonten enorm energi om til intens stråling og jetstråler!',
+  },
+  {
+    id: 'gal-mcq-8',
+    number: 8,
+    relatedStepIndex: 7,
+    topicBadge: 'Steg 8 • De første urgalaksene',
+    question:
+      'Hvordan skiller de aller første galaksene 200–400 millioner år etter Big Bang seg fra dagens store spiralgalakser som Melkeveien?',
+    options: [
+      'De var nøyaktig like store og inneholdt like mye gull og uran som dagens galakser',
+      'De besto utelukkende av kalde hvite dverger uten hydrogengass',
+      'De inneholdt ingen stjerner, bare ferdige steinplaneter som Jorda',
+      'De var mindre, mer kompakte og klumpete «babygalakser» av nesten ren hydrogen- og heliumgass som senere vokste ved sammensmeltinger',
+    ],
+    correctIndex: 3,
+    explanation:
+      'Store galakser vokste hierarkisk over milliarder av år ved at mange små, gassrike urgalakser trakk til seg gass og smeltet sammen!',
+  },
+  {
+    id: 'gal-mcq-9',
+    number: 9,
+    relatedStepIndex: 8,
+    topicBadge: 'Steg 9 • Kosmisk adresse & Laniakea',
+    question:
+      'Hvilken rekkefølge viser vår «kosmiske adresse» riktig fra minst til størst struktur?',
+    options: [
+      'Solsystemet → Laniakea → Melkeveien → Den lokale gruppen',
+      'Solsystemet → Melkeveien → Den lokale gruppen → Superhopen Laniakea → Det kosmiske nettverket',
+      'Den lokale gruppen → Solsystemet → Melkeveien → Jorda',
+      'Melkeveien → Solsystemet → Det kosmiske nettverket → Den lokale gruppen',
+    ],
+    correctIndex: 1,
+    explanation:
+      'Solsystemet ligger i Melkeveien (~100 000 lysår), som tilhører Den lokale gruppen (~80 galakser), som igjen inngår i superhopen Laniakea (~100 000 galakser) i Det kosmiske nettverket!',
+  },
+  {
+    id: 'gal-mcq-10',
+    number: 10,
+    relatedStepIndex: 9,
+    topicBadge: 'Steg 10 • Det kosmiske nettverket',
+    question:
+      'Hvordan er galaksene fordelt når vi kartlegger universet på sin aller største skala (milliarder av lysår)?',
+    options: [
+      'I «Det kosmiske nettverket» – lange lysende tråder (filamenter) og knutepunkter av galaksehoper langs et skjelett av mørk materie, med enorme tomrom imellom',
+      'Samlet i én eneste tett kule midt i universet med helt tomt rom utenfor',
+      'Ordnet i helt rette firkantede ruter med nøyaktig lik avstand mellom alle galakser',
+      'Kun langs en tynn ring rundt Solsystemet vårt',
+    ],
+    correctIndex: 0,
+    explanation:
+      'Små tetthetsvariasjoner fra det tidlige universet (synlige i CMB) vokste gjennom tyngdekraften fra mørk materie frem til dagens kosmiske nettverk av filamenter, hoper og tomrom!',
+  },
+];
+
+

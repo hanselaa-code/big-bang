@@ -2,6 +2,7 @@ import { Minimize } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
 import { BigBangTimeline } from './components/BigBangTimeline';
 import { ElementsExplorer } from './components/ElementsExplorer';
+import { GalaxiesExplorer } from './components/GalaxiesExplorer';
 import { ImageLightbox } from './components/ImageLightbox';
 import { InfoPanel } from './components/InfoPanel';
 import { QrShareModal } from './components/QrShareModal';
@@ -430,6 +431,14 @@ export function App() {
               )}
               {activeThemeId === 'straling' && (
                 <RadiationExplorer
+                  unlockedStepIndex={unlockedStepIndex}
+                  showAllSteps={showAllSteps}
+                  selectedNodeId={selectedNodeId}
+                  onSelectNode={handleSelectNode}
+                />
+              )}
+              {activeThemeId === 'galakser' && (
+                <GalaxiesExplorer
                   unlockedStepIndex={unlockedStepIndex}
                   showAllSteps={showAllSteps}
                   selectedNodeId={selectedNodeId}

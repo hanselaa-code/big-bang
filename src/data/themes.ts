@@ -13,8 +13,15 @@ import {
   ELEMENTS_NODES,
 } from './elementsData';
 import {
+  GALAXIES_CONTROL_QUESTIONS,
+  GALAXIES_MAIN_STEP_IDS,
+  GALAXIES_NODE_MAP,
+  GALAXIES_NODES,
+} from './galaxiesData';
+import {
   BIG_BANG_MCQ_QUESTIONS,
   ELEMENTS_MCQ_QUESTIONS,
+  GALAXIES_MCQ_QUESTIONS,
   RADIATION_MCQ_QUESTIONS,
   SPACETIME_MCQ_QUESTIONS,
   STARS_MCQ_QUESTIONS,
@@ -44,6 +51,7 @@ export type ThemeId =
   | 'stjerner'
   | 'grunnstoffer'
   | 'straling'
+  | 'galakser'
   | 'romtid';
 export type AppView = 'universet' | ThemeId;
 
@@ -217,6 +225,44 @@ export const THEMES: Record<ThemeId, ThemeConfig> = {
     ],
   },
 
+  galakser: {
+    id: 'galakser',
+    hash: '#galakser',
+    title:
+      'Galakser – Melkeveien, galaksetyper, mørk materie og det kosmiske nettverket',
+    dropdownTitle: 'Galakser – Melkeveien & nettverket',
+    dropdownBadge: 'Kosmisk atlas • Melkeveien → Laniakea',
+    dropdownDescription:
+      'Utforsk stjerneøyer i rommet, hjemmegalaksen Melkeveien med Sagittarius A*, spiral- og ellipsegalakser, kollisjonen med Andromeda, mørk materie, kvasarer og det kosmiske nettverket.',
+    subtitle:
+      'Interaktivt kosmisk atlas • Fra Melkeveien og mørk materie til galaksehoper og Laniakea (Vg1 Naturfag)',
+    stepWord: 'Steg',
+    showAllLabel: 'Vis hele galakse-atlaset',
+    progressiveLabel: 'Stegvis modus',
+    quizTitle:
+      'Kontrollspørsmål: Galakser, Melkeveien, mørk materie & det kosmiske nettverket',
+    backFromQuizLabel: 'Tilbake til galakse-atlaset',
+    summaryHeadingPrefix: 'Hva skjer på denne skalaen?',
+    traitsHeading: 'Kjennetegn og fysiske mekanismer',
+    classroomBoxHeading: 'Klasseromstriks & tankeeksperiment',
+    examplesHeading: 'Nøkkelbegreper på dette steget',
+    mainStepIds: GALAXIES_MAIN_STEP_IDS,
+    allNodes: GALAXIES_NODES,
+    nodeMap: GALAXIES_NODE_MAP,
+    controlQuestions: GALAXIES_CONTROL_QUESTIONS,
+    mcqQuestions: GALAXIES_MCQ_QUESTIONS,
+    quizShortcuts: [
+      { label: 'Steg 1: Stjerneøyer (Hubble 1924)', idx: 0 },
+      { label: 'Steg 2: Melkeveien & Sola (26 000 ly)', idx: 1 },
+      { label: 'Steg 3: Sagittarius A* (4,1 mill. M☉)', idx: 2 },
+      { label: 'Steg 4: Spiral, ellipse & irregulær', idx: 3 },
+      { label: 'Steg 5: Andromeda-kollisjonen', idx: 4 },
+      { label: 'Steg 6: Vera Rubin & mørk materie', idx: 5 },
+      { label: 'Steg 7–8: Kvasarer & JWST-urgalakser', idx: 7 },
+      { label: 'Steg 9–10: Laniakea & kosmisk nettverk', idx: 9 },
+    ],
+  },
+
   romtid: {
     id: 'romtid',
     hash: '#romtid',
@@ -259,6 +305,7 @@ export const THEME_LIST: ThemeConfig[] = [
   THEMES.stjerner,
   THEMES.grunnstoffer,
   THEMES.straling,
+  THEMES.galakser,
   THEMES.romtid,
 ];
 
@@ -283,6 +330,13 @@ export function parseViewFromHash(hash: string): AppView {
     clean === 'radiation'
   ) {
     return 'straling';
+  }
+  if (
+    clean === 'galakser' ||
+    clean === 'galakse' ||
+    clean === 'galaxies'
+  ) {
+    return 'galakser';
   }
   if (clean === 'romtid' || clean === 'spacetime') {
     return 'romtid';

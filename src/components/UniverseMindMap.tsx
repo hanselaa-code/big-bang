@@ -37,7 +37,7 @@ export function UniverseMindMap({ onSelectTheme }: UniverseMindMapProps) {
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 border border-slate-700/75 text-[11px] sm:text-xs text-slate-300 shadow-lg">
           <Sparkles className="w-3.5 h-3.5 text-amber-300 shrink-0" />
           <span>
-            Trykk på en sirkel i tankekartet —{' '}
+            Alle 6 undertemaene er klare:{' '}
             <button
               type="button"
               onClick={() => onSelectTheme('big-bang')}
@@ -68,6 +68,14 @@ export function UniverseMindMap({ onSelectTheme }: UniverseMindMapProps) {
               className="font-bold text-rose-300 hover:text-rose-200 underline underline-offset-2 cursor-pointer"
             >
               Stråling
+            </button>
+            ,{' '}
+            <button
+              type="button"
+              onClick={() => onSelectTheme('galakser')}
+              className="font-bold text-indigo-300 hover:text-indigo-200 underline underline-offset-2 cursor-pointer"
+            >
+              Galakser
             </button>{' '}
             og{' '}
             <button
@@ -76,8 +84,7 @@ export function UniverseMindMap({ onSelectTheme }: UniverseMindMapProps) {
               className="font-bold text-purple-300 hover:text-purple-200 underline underline-offset-2 cursor-pointer"
             >
               Romtid
-            </button>{' '}
-            er klare!
+            </button>
           </span>
         </div>
       </div>

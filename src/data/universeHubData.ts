@@ -89,14 +89,14 @@ export const UNIVERSE_HUB_NODES: UniverseHubNode[] = [
   {
     id: 'galakser',
     title: 'Galakser',
-    badge: 'Kommer snart',
+    badge: 'Kosmisk atlas • Melkeveien, mørk materie & nettverk',
     shortDescription:
       'Melkeveien, spiral- og ellipsegalakser, mørk materie og det kosmiske nettverket.',
     imageUrl: cosmosImg('hub_galakser.jpg'),
     cx: 295,
     cy: 630,
     r: 98,
-    linkedThemeId: null,
+    linkedThemeId: 'galakser',
   },
   {
     id: 'romtid',
