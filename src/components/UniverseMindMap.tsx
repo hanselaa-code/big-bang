@@ -1,4 +1,12 @@
-import { ArrowRight, Clock, Sparkles, X } from 'lucide-react';
+import {
+  ArrowRight,
+  BookOpen,
+  Clock,
+  Download,
+  ExternalLink,
+  Sparkles,
+  X,
+} from 'lucide-react';
 import { useState } from 'react';
 import type { ThemeId } from '../data/themes';
 import {
@@ -463,9 +471,36 @@ export function UniverseMindMap({ onSelectTheme }: UniverseMindMapProps) {
             </div>
           </div>
         ) : (
-          <p className="text-xs text-slate-400 text-center">
-            Tankekart: Hvordan temaene i universet henger sammen (Vg1 Naturfag)
-          </p>
+          <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 px-3.5 py-2 rounded-2xl bg-slate-900/80 border border-slate-700/75 shadow-lg">
+            <div className="flex items-center gap-2 text-xs text-slate-200">
+              <BookOpen className="w-4 h-4 text-emerald-300 shrink-0" />
+              <span className="font-bold text-white">Komplett lærebok (PDF):</span>
+              <span className="hidden md:inline text-slate-400">
+                Hele pensumet for Vg1 Naturfag (108 s.)
+              </span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <a
+                id="mindmap-textbook-open"
+                href="./Universet-Laerebok-Vg1.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/45 text-emerald-200 text-xs font-bold transition-colors"
+              >
+                <ExternalLink className="w-3.5 h-3.5" />
+                <span>Åpne i nettleser</span>
+              </a>
+              <a
+                id="mindmap-textbook-download"
+                href="./Universet-Laerebok-Vg1.pdf"
+                download="Universet-Laerebok-Vg1.pdf"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-amber-500/18 hover:bg-amber-500/28 border border-amber-400/45 text-amber-200 text-xs font-bold transition-colors"
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span>Last ned PDF</span>
+              </a>
+            </div>
+          </div>
         )}
       </div>
     </div>

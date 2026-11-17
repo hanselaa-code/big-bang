@@ -1,6 +1,9 @@
 import {
+  BookOpen,
   Check,
   ChevronDown,
+  Download,
+  ExternalLink,
   Eye,
   EyeOff,
   HelpCircle,
@@ -55,23 +58,33 @@ export function TopBar({
 }: TopBarProps) {
   const [showShortcuts, setShowShortcuts] = useState(false);
   const [themeMenuOpen, setThemeMenuOpen] = useState(false);
+  const [textbookMenuOpen, setTextbookMenuOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const textbookRef = useRef<HTMLDivElement | null>(null);
 
   const isMindMap = activeView === 'universet';
 
   useEffect(() => {
-    if (!themeMenuOpen) return;
+    if (!themeMenuOpen && !textbookMenuOpen) return;
     const handleOutside = (e: MouseEvent) => {
       if (
+        themeMenuOpen &&
         dropdownRef.current &&
         !dropdownRef.current.contains(e.target as Node)
       ) {
         setThemeMenuOpen(false);
       }
+      if (
+        textbookMenuOpen &&
+        textbookRef.current &&
+        !textbookRef.current.contains(e.target as Node)
+      ) {
+        setTextbookMenuOpen(false);
+      }
     };
     document.addEventListener('mousedown', handleOutside);
     return () => document.removeEventListener('mousedown', handleOutside);
-  }, [themeMenuOpen]);
+  }, [themeMenuOpen, textbookMenuOpen]);
 
   const ActiveIcon = isMindMap ? Orbit : Sparkles;
   const headerBadge = isMindMap
@@ -286,6 +299,81 @@ export function TopBar({
             </span>
           </div>
         )}
+
+        {/* Lærebok (PDF) dropdown button: Open in browser or Download */}
+        <div ref={textbookRef} className="relative">
+          <button
+            id="btn-textbook-pdf"
+            type="button"
+            onClick={() => setTextbookMenuOpen((prev) => !prev)}
+            aria-expanded={textbookMenuOpen}
+            aria-haspopup="menu"
+            title="Komplett lærebok i PDF-format (åpne i nettleser eller last ned)"
+            className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-2 rounded-xl bg-emerald-500/18 hover:bg-emerald-500/28 border border-emerald-400/45 text-emerald-200 text-xs font-bold transition-all cursor-pointer"
+          >
+            <BookOpen className="w-4 h-4 text-emerald-300" />
+            <span className="hidden xs:inline sm:inline">Lærebok (PDF)</span>
+            <ChevronDown
+              className={`w-3.5 h-3.5 text-emerald-300 transition-transform duration-150 ${
+                textbookMenuOpen ? 'rotate-180' : ''
+              }`}
+            />
+          </button>
+
+          {textbookMenuOpen && (
+            <div
+              role="menu"
+              aria-label="Lærebok i PDF-format"
+              className="absolute right-0 top-full mt-2 w-72 p-2.5 rounded-2xl glass-panel border border-emerald-400/35 shadow-2xl z-50 space-y-2 animate-card-enter"
+            >
+              <div className="px-1.5 pt-0.5">
+                <div className="text-xs font-extrabold text-white font-display">
+                  UNIVERSET – Komplett lærebok
+                </div>
+                <div className="text-[11px] text-slate-300 mt-0.5 leading-snug">
+                  Hele Vg1-pensumet i PDF (108 sider): alle 6 temaer, 60 illustrerte deler, ordliste, 84 oppgaver &amp; fasit.
+                </div>
+              </div>
+
+              <div className="space-y-1.5 pt-1 border-t border-slate-800">
+                <a
+                  id="link-textbook-open"
+                  href="./Universet-Laerebok-Vg1.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  role="menuitem"
+                  onClick={() => setTextbookMenuOpen(false)}
+                  className="w-full flex items-center justify-between gap-2 px-3 py-2 rounded-xl bg-emerald-500/18 hover:bg-emerald-500/30 border border-emerald-400/40 text-emerald-100 text-xs font-bold transition-colors"
+                >
+                  <span className="inline-flex items-center gap-2">
+                    <ExternalLink className="w-3.5 h-3.5 text-emerald-300" />
+                    Åpne i nettleseren
+                  </span>
+                  <span className="text-[10px] font-mono-time text-emerald-300">
+                    PDF
+                  </span>
+                </a>
+
+                <a
+                  id="link-textbook-download"
+                  href="./Universet-Laerebok-Vg1.pdf"
+                  download="Universet-Laerebok-Vg1.pdf"
+                  role="menuitem"
+                  onClick={() => setTextbookMenuOpen(false)}
+                  className="w-full flex items-center justify-between gap-2 px-3 py-2 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-slate-700 text-slate-100 text-xs font-bold transition-colors"
+                >
+                  <span className="inline-flex items-center gap-2">
+                    <Download className="w-3.5 h-3.5 text-amber-300" />
+                    Last ned PDF
+                  </span>
+                  <span className="text-[10px] font-mono-time text-slate-400">
+                    ~8,6 MB
+                  </span>
+                </a>
+              </div>
+            </div>
+          )}
+        </div>
 
         {/* QR Code button for sharing with students on mobile */}
         <button
