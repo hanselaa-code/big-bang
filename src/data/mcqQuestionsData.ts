@@ -873,6 +873,74 @@ export const RADIATION_MCQ_QUESTIONS: McqQuestionItem[] = [
     explanation:
       'Sola (5 800 K) stråler mest i kortbølget synlig lys som går gjennom lufta og varmer bakken, mens den lunkne Jorda (~288 K) stråler ut langbølget IR som absorberes av drivhusgasser!',
   },
+  {
+    id: 'rad-mcq-11',
+    number: 11,
+    relatedStepIndex: 10,
+    topicBadge: 'Steg 11 • Bølgefenomener',
+    question:
+      'Hvorfor bøyes radiobølger lettere rundt fjelltopper og bygninger enn synlig lys?',
+    options: [
+      'Fordi radiobølger har mye kortere bølgelengde enn lys',
+      'Fordi radiobølger har lang bølgelengde (meter til kilometer) på størrelse med hindringer, slik at bøyning (diffraksjon) blir sterk',
+      'Fordi radiobølger reiser raskere enn lysfarten c',
+      'Fordi synlig lys ikke kan reflekteres eller brytes',
+    ],
+    correctIndex: 1,
+    explanation:
+      'Bøyning (diffraksjon) er sterkest når bølgelengden er omtrent like stor som spalten eller hindringen. Radiobølger (meterlange) runder derfor bygninger og åser lett, mens lys (~500 nm) kaster skarpe skygger.',
+  },
+  {
+    id: 'rad-mcq-12',
+    number: 12,
+    relatedStepIndex: 11,
+    topicBadge: 'Steg 12 • Trådløs kommunikasjon',
+    question:
+      'Hva betyr «modulasjon» i trådløs kommunikasjon som 5G, WiFi og radio?',
+    options: [
+      'At man endrer amplituden, frekvensen eller fasen til en høyfrekvent bærebølge i takt med informasjonen (0 og 1 / lyd) som skal sendes',
+      'At man gjør radiobølger om til ioniserende gammastråling for å øke rekkevidden',
+      'At mottakeren stopper all bakgrunnsstråling fra verdensrommet',
+      'At antennen bremser lyset ned til lydens hastighet',
+    ],
+    correctIndex: 0,
+    explanation:
+      'En ren bærebølge bærer ingen melding i seg selv. Ved modulasjon koder senderen informasjon inn på bærebølgen ved å variere amplitude (AM), frekvens (FM) eller digitale tilstander.',
+  },
+  {
+    id: 'rad-mcq-13',
+    number: 13,
+    relatedStepIndex: 12,
+    topicBadge: 'Steg 13 • Radioaktivitet (α, β, γ)',
+    question:
+      'Hvilken rekkefølge viser økende gjennomtrengningsevne (fra svakest til sterkest) for de tre typene radioaktiv stråling?',
+    options: [
+      'Gammastråling (γ) → Betastråling (β) → Alfastråling (α)',
+      'Betastråling (β) → Alfastråling (α) → Gammastråling (γ)',
+      'Alfastråling (α) → Betastråling (β) → Gammastråling (γ)',
+      'Alle tre stoppes like lett av et tynt papirark',
+    ],
+    correctIndex: 2,
+    explanation:
+      'Alfastråling (tunge heliumkjerner) stoppes av et papirark eller hud, betastråling (raske elektroner) stoppes av en tynn aluminiumsplate, mens gammastråling (fotoner) krever tykt bly eller betong.',
+  },
+  {
+    id: 'rad-mcq-14',
+    number: 14,
+    relatedStepIndex: 13,
+    topicBadge: 'Steg 14 • Stråling, helse & kildekritikk',
+    question:
+      'Hvorfor gir mobilstråling og WiFi (2,4–5 GHz) ikke direkte DNA-skader slik UV-B, røntgen eller radongass gjør?',
+    options: [
+      'Fordi menneskeskapt stråling alltid er svakere enn naturlig stråling',
+      'Fordi hvert foton i radiobølger/mikrobølger har altfor lav energi (ikke-ioniserende) til å slå løs elektroner fra DNA-molekyler',
+      'Fordi mobilmaster bare sender når ingen er i nærheten',
+      'Fordi huden vår er laget av bly',
+    ],
+    correctIndex: 1,
+    explanation:
+      'Det er fotonenergien (E = h · f) som avgjør om stråling er ioniserende. Mobil/WiFi-fotoner har over en million ganger for lav energi til å ionisere atomer eller klippe over DNA-tråder.',
+  },
 ];
 
 export const GALAXIES_MCQ_QUESTIONS: McqQuestionItem[] = [

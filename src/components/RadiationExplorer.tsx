@@ -51,6 +51,15 @@ function getZonePalette(node: RadiationNodeData): ZonePalette {
       text: '#E0F2FE',
     };
   }
+  if (cat === 'earth_tech_health') {
+    return {
+      accent: '#34D399',
+      stroke: '#A7F3D0',
+      badgeBg: 'rgba(6, 78, 59, 0.92)',
+      badgeBorder: 'rgba(52, 211, 153, 0.68)',
+      text: '#D1FAE5',
+    };
+  }
   return {
     accent: '#2DD4BF',
     stroke: '#99F6E4',
@@ -184,17 +193,17 @@ export function RadiationExplorer({
   }, []);
 
   const computeOverviewCamera = useCallback(() => {
-    const worldW = 2560;
+    const worldW = 3540;
     const worldH = 1080;
     const scale = Math.max(
-      0.24,
+      0.19,
       Math.min(
         0.86,
         Math.min(viewport.width / worldW, viewport.height / worldH) * 0.95,
       ),
     );
     return {
-      x: 1335,
+      x: 1825,
       y: 505,
       scale,
     };
@@ -221,7 +230,7 @@ export function RadiationExplorer({
       );
       const clampedScale = Math.max(0.42, Math.min(0.86, rawScale));
       const rawCenterX = (minX + maxX) / 2;
-      const clampedCenterX = Math.max(505, Math.min(2195, rawCenterX));
+      const clampedCenterX = Math.max(505, Math.min(3175, rawCenterX));
 
       return {
         x: clampedCenterX,
@@ -522,7 +531,7 @@ export function RadiationExplorer({
             <line
               x1={110}
               y1={444}
-              x2={2545}
+              x2={3525}
               y2={444}
               stroke="#475569"
               strokeWidth={1.2}
@@ -531,7 +540,7 @@ export function RadiationExplorer({
             <line
               x1={110}
               y1={648}
-              x2={2545}
+              x2={3525}
               y2={648}
               stroke="#475569"
               strokeWidth={1.2}
@@ -611,6 +620,30 @@ export function RadiationExplorer({
               letterSpacing={0.65}
             >
               SONE 3 • BAKGRUNNSSTRÅLING (CMB) &amp; JORDAS ATMOSFÆRE (STEG 8–10)
+            </text>
+          </g>
+
+          <g transform="translate(3048, 80)">
+            <rect
+              x={-355}
+              y={-22}
+              width={710}
+              height={44}
+              rx={14}
+              fill="rgba(6, 78, 59, 0.44)"
+              stroke="rgba(52, 211, 153, 0.55)"
+              strokeWidth={1.4}
+            />
+            <text
+              x={0}
+              y={5}
+              textAnchor="middle"
+              fill="#A7F3D0"
+              fontSize={13}
+              fontWeight={800}
+              letterSpacing={0.65}
+            >
+              SONE 4 • BØLGER, TRÅDLØS TEKNOLOGI, RADIOAKTIVITET &amp; HELSE (STEG 11–14)
             </text>
           </g>
 

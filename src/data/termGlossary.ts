@@ -500,6 +500,35 @@ export const TERM_GLOSSARY: Record<string, string> = {
     'Et enormt sort hull med millioner til milliarder ganger Solas masse, som finnes i kjernen av nesten alle store galakser.',
   'Big Freeze':
     'Et sannsynlig fremtidsscenario der universet fortsetter å utvide seg for alltid, blir kaldere og mørkere, og nye stjerner til slutt slokner.',
+  // --- BØLGEFENOMENER, TRÅDLØS KOMMUNIKASJON, RADIOAKTIVITET & HELSE ---
+  'Refleksjon':
+    'Når en bølge (som lys eller lyd) treffer en flate og kastes tilbake slik at innfallsvinkel er lik refleksjonsvinkel.',
+  'Brytning (refraksjon)':
+    'At en bølge skifter retning når den går inn i et nytt medium (f.eks. fra luft til glass eller vann) fordi bølgefarten endrer seg.',
+  'Bøyning (diffraksjon)':
+    'At bølger sprer seg utover etter å ha passert gjennom en smal åpning eller rundt en kant – sterkest når åpningen er på størrelse med bølgelengden.',
+  'Konstruktiv & destruktiv interferens':
+    'Når bølger møtes og forsterker hverandre (bølgetopp møter bølgetopp) eller slukker hverandre ut (bølgetopp møter bølgedal).',
+  'Bærebølge & modulasjon':
+    'En jevn høyfrekvent elektromagnetisk bølge som får endret amplitude, frekvens eller fase i takt med data/lyd for å frakte informasjon trådløst.',
+  'Sender & mottaker (antenne)':
+    'Senderantennen gjør elektriske signaler om til elektromagnetiske bølger; mottakerantennen fanger bølgene og henter ut informasjonen igjen (demodulasjon).',
+  'WiFi (2,4 GHz vs. 5 GHz) & 5G':
+    'Trådløse nettverk som bruker radio-/mikrobølger: høyere frekvens gir høyere datafart, men kortere rekkevidde og svakere gjennomtrengning gjennom vegger.',
+  'GPS-signaler':
+    'Svake radiobølger (~1,57 GHz) sendt fra satellitter i 20 200 km høyde som lar mobilen regne ut posisjon med meterpresisjon.',
+  'Alfastråling (α)':
+    'Radioaktiv partikkelstråling bestående av tunge heliumkjerner (2 protoner + 2 nøytroner). Svært ioniserende på nært hold, men stoppes av et papirark.',
+  'Betastråling (β)':
+    'Radioaktiv partikkelstråling av raske elektroner som sendes ut når et nøytron omdannes til et proton. Stoppes av en tynn aluminiumsplate.',
+  'Gammastråling (γ)':
+    'Ekstremt høyfrekvent og gjennomtrengende elektromagnetisk stråling fra atomkjerner. Krever tykt bly eller betong for å skjermes.',
+  'Becquerel (Bq) & Sievert (Sv)':
+    'Bq måler hvor mange atomkjerner som henfaller per sekund (aktivitet), mens Sv måler den biologiske helseeffekten av stråledosen på kroppen.',
+  'Radon i inneluft':
+    'En naturlig, radioaktiv edelgass fra uran i berggrunnen som sender ut alfastråling og kan samle seg i kjellere (tiltaksgrense 100 Bq/m³ i Norge).',
+  'Kildekritikk om stråling':
+    'Å sjekke om en påstand om stråling skiller mellom ikke-ioniserende (mobil/WiFi) og ioniserende stråling (UV, røntgen, radon) og bygger på fagfellevurdert forskning.',
 };
 
 export function getTermDefinition(term: string): string {

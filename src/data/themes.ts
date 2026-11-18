@@ -222,6 +222,9 @@ export const THEMES: Record<ThemeId, ThemeConfig> = {
       { label: 'Steg 6–7: Spektrallinjer & rødforskyvning', idx: 6 },
       { label: 'Steg 8: Bakgrunnsstrålingen (CMB)', idx: 7 },
       { label: 'Steg 9–10: Ozonlag & drivhuseffekt', idx: 9 },
+      { label: 'Steg 11: Bølgefenomener (refleksjon–interferens)', idx: 10 },
+      { label: 'Steg 12: Trådløs kommunikasjon (5G/WiFi)', idx: 11 },
+      { label: 'Steg 13–14: Radioaktivitet, helse & strålevern', idx: 13 },
     ],
   },
 

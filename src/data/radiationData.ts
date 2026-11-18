@@ -7,7 +7,8 @@ import {
 export type RadiationZoneCategory =
   | 'em_spectrum'
   | 'cosmic_decoding'
-  | 'cmb_and_earth';
+  | 'cmb_and_earth'
+  | 'earth_tech_health';
 
 export interface RadiationNodeData extends CosmicNodeData {
   zoneCategory: RadiationZoneCategory;
@@ -24,6 +25,10 @@ export const RADIATION_MAIN_STEP_IDS: string[] = [
   'rad_cmb_afterglow',
   'rad_atmosphere_windows',
   'rad_greenhouse_balance',
+  'rad_wave_phenomena',
+  'rad_wireless_comm',
+  'rad_radioactivity_decay',
+  'rad_health_protection',
 ];
 
 export const RADIATION_NODES: RadiationNodeData[] = [
@@ -625,6 +630,245 @@ export const RADIATION_NODES: RadiationNodeData[] = [
       'Naturlig vs. forsterket drivhuseffekt',
     ],
   },
+
+  // ====================================================================
+  // SONE 4 (STEG 11–14): BØLGER, TEKNOLOGI & HELSE PÅ JORDA (VG1)
+  // ====================================================================
+  {
+    id: 'rad_wave_phenomena',
+    stepIndex: 10,
+    isMainPath: true,
+    parentId: 'rad_greenhouse_balance',
+    stepNumber: 11,
+    title: 'Sentrale bølgefenomener – Refleksjon, brytning, bøyning og interferens',
+    shortLabel: 'Bølgefenomener (4 prinsipper)',
+    subtitleTag:
+      'Hvordan bølger oppfører seg når de møter speil, glassprismer, smale spalter og andre bølger',
+    timeAfterBB: 'Speil • Prisme • Spalte • Overlagring',
+    eraLabel: 'Sone 4 • Bølger & Teknologi',
+    temperatureLabel: 'Bølgefysikk (Vg1)',
+    x: 2680,
+    y: 648,
+    cardSide: 'below',
+    zoneCategory: 'earth_tech_health',
+    epochCategory: 'modern_cosmos',
+    cosmicTag: 'Styrer alt fra regnbuer og briller til LIGO-detektorer',
+    traceBadge: 'NAT01-05 • Sentrale bølgefenomener',
+    image: cosmosImg('rad_extra_wave_phenomena.jpg'),
+    imageCaption:
+      'De fire sentrale bølgefenomenene: Refleksjon mot speil (øverst t.v.), brytning i prisme (øverst t.h.), bøyning/diffraksjon gjennom smal spalte (nederst t.v.) og interferens mellom to bølgekilder (nederst t.h.).',
+    summaryTitle:
+      'Fire enkle regler forklarer hvorfor du ser deg selv i speilet, hvorfor himmelen gir regnbuer, og hvordan LIGO fanger gravitasjonsbølger!',
+    whatHappens:
+      'Alle bølger – enten det er lys, radiobølger, lyd eller vannbølger – følger fire universelle fenomener. Ved REFLEKSJON spretter bølgen tilbake fra en flate med lik innfalls- og refleksjonsvinkel. Ved BRYTNING (refraksjon) skifter bølgen retning fordi bølgefarten endrer seg når den går inn i et nytt stoff, for eksempel fra luft til glass eller vann. Ved BØYNING (diffraksjon) sprer bølgen seg utover rundt kanter eller gjennom smale åpninger – sterkest når åpningen er på størrelse med bølgelengden. Og ved INTERFERENS møtes to bølger og legger seg oppå hverandre: bølgetopp mot bølgetopp forsterker lyset (konstruktiv), mens bølgetopp mot bølgedal slukker det ut (destruktiv).',
+    keyTraits: [
+      {
+        title: 'Refleksjon & brytning i optikk og astronomi',
+        description:
+          'Speilteleskoper som James Webb bruker refleksjon for å samle svakt stjernelys, mens briller, kameralinser og prismer bruker brytning til å fokusere og splitte lys i regnbuens farger.',
+        icon: 'sparkles',
+      },
+      {
+        title: 'Bøyning (diffraksjon) forklarer lyd rundt hjørner og 5G-dekning',
+        description:
+          'Lydbølger (~1 m) og radiobølger bøyes lett rundt bygninger og åser. Synlig lys (~500 nm) er altfor kortbølget til å bøyes rundt hushjørner og kaster derfor skarpe skygger.',
+        icon: 'waves',
+      },
+      {
+        title: 'Interferens – fra støydempende hodetelefoner til LIGO',
+        description:
+          'Støydempende hodetelefoner lager motlyd som gir destruktiv interferens. LIGO-observatoriet bruker laserinterferens til å måle bevegelser mindre enn én tusendel av et proton!',
+        icon: 'zap',
+      },
+    ],
+    classroomTest:
+      'Lys med en svak grønn/rød laserpeker (klasse 2, ikke rett mot øyne!) mot baksiden av en gammel CD/DVD-plate: De mikroskopiske sporene virker som et optisk gitter og lager skarpe lysprikker på veggen gjennom bøyning og konstruktiv interferens!',
+    didYouKnow:
+      'Regnbuen oppstår ved at sollys brytes når det går inn i runde regndråper, reflekteres på baksiden av dråpen, og brytes på nytt ut igjen – fordi rødt lys brytes litt mindre enn fiolett, skilles fargene!',
+    examples: [
+      'Refleksjon',
+      'Brytning (refraksjon)',
+      'Bøyning (diffraksjon)',
+      'Konstruktiv & destruktiv interferens',
+    ],
+  },
+
+  {
+    id: 'rad_wireless_comm',
+    stepIndex: 11,
+    isMainPath: true,
+    parentId: 'rad_wave_phenomena',
+    stepNumber: 12,
+    title: 'Trådløs kommunikasjon – Fra sender og bærebølge til 5G, WiFi og GPS',
+    shortLabel: 'Trådløs kommunikasjon',
+    subtitleTag:
+      'Digitalisering, bærebølge og modulasjon – slik pakkes lyd, bilder og data inn i radiobølger',
+    timeAfterBB: 'f ≈ 88 MHz – 5 GHz',
+    eraLabel: 'Sone 4 • Bølger & Teknologi',
+    temperatureLabel: 'AM • FM • 5G • WiFi',
+    x: 2925,
+    y: 444,
+    cardSide: 'above',
+    zoneCategory: 'earth_tech_health',
+    epochCategory: 'modern_cosmos',
+    cosmicTag: 'Sender → Bærebølge + Modulasjon → Mottaker',
+    traceBadge: 'NAT01-05 • Trådløs teknologi',
+    image: cosmosImg('rad_extra_wireless_comm.jpg'),
+    imageCaption:
+      'Signalkjeden i trådløs kommunikasjon: digitalisert informasjon (0 og 1) moduleres på en bærebølge, sendes ut fra en antenne, fanges opp av mottakerantennen og demoduleres tilbake til lyd, bilde eller tekst.',
+    summaryTitle:
+      'En jevn radiobølge inneholder ingen melding før senderen «former» den – det kalles modulasjon!',
+    whatHappens:
+      'Hver gang du strømmer musikk på 5G, kobler til WiFi eller bruker GPS, går informasjonen gjennom samme fysiske signalkjede. Først gjøres lyd, bilder og tekst om til digitale tall (0 og 1). Deretter lager senderen en jevn, høyfrekvent elektromagnetisk BÆREBØLGE. For å pakke inn meldingen endrer senderen enten bølgehøyden (amplitudemodulasjon, AM), frekvensen (frekvensmodulasjon, FM) eller raske digitale hopp i fase og amplitude (4G/5G/WiFi). Senderantennen stråler bølgene ut med lysfarten (300 000 km/s), og mottakerantennen gjør prosessen motsatt (demodulasjon) så meldingen dukker opp på skjermen din!',
+    keyTraits: [
+      {
+        title: 'Høy frekvens = høy fart, men kortere rekkevidde',
+        description:
+          'WiFi på 5 GHz overfører mer data per sekund enn 2,4 GHz, men har kortere bølgelengde og stoppes lettere av betongvegger fordi bøyningen rundt hindringer blir svakere.',
+        icon: 'compass',
+      },
+      {
+        title: 'GPS: Tidsmåling fra verdensrommet',
+        description:
+          'GPS-satellitter i 20 200 km høyde sender svake radiosignaler (~1,57 GHz) med nøyaktig atomklokketid. Mobilen måler tidsforskjellen fra minst fire satellitter og beregner posisjonen din på få meter!',
+        icon: 'globe',
+      },
+      {
+        title: 'Bruksområder over hele samfunnet',
+        description:
+          'Samme grunnprinsipp driver Bluetooth-ørepluggene dine, trådløse medisinske sensorer, værradar, nødsamband og kommunikasjon med romsonder milliarder av kilometer unna.',
+        icon: 'waves',
+      },
+    ],
+    classroomTest:
+      'Test rekkevidde i praksis: Be elevene sammenligne WiFi-signalstyrken (dBm) på 2,4 GHz vs. 5 GHz rett ved ruteren og deretter bak to murvegger eller en lukket dør. 2,4 GHz holder lenger gjennom vegger!',
+    didYouKnow:
+      'GPS-satellittene sender med omtrent samme effekt som en svak lyspære (25–50 watt) over 20 000 km unna. Når signalet treffer mobilen din, er det svakere enn én milliontedels milliarddels watt – likevel fanges det opp!',
+    examples: [
+      'Bærebølge & modulasjon',
+      'Sender & mottaker (antenne)',
+      'WiFi (2,4 GHz vs. 5 GHz) & 5G',
+      'GPS-signaler',
+    ],
+  },
+
+  {
+    id: 'rad_radioactivity_decay',
+    stepIndex: 12,
+    isMainPath: true,
+    parentId: 'rad_wireless_comm',
+    stepNumber: 13,
+    title: 'Radioaktivitet – Ustabile kjerner, α-, β- og γ-stråling og halveringstid',
+    shortLabel: 'Radioaktivitet (α, β, γ)',
+    subtitleTag:
+      'Når atomkjerner har feil balanse av protoner og nøytroner, sender de ut ioniserende stråling',
+    timeAfterBB: 'Kjernefysikk • T½ & Becquerel',
+    eraLabel: 'Sone 4 • Bølger & Helse',
+    temperatureLabel: 'Papir • Aluminium • Bly',
+    x: 3170,
+    y: 648,
+    cardSide: 'below',
+    zoneCategory: 'earth_tech_health',
+    epochCategory: 'modern_cosmos',
+    cosmicTag: 'Ustabile isotoper søker stabilitet med fast halveringstid',
+    traceBadge: 'NAT01-05 • Ioniserende stråling',
+    image: cosmosImg('rad_extra_alpha_beta_gamma.jpg'),
+    imageCaption:
+      'Gjennomtrengningsevnen til radioaktiv stråling: Alfastråling (heliumkjerner) stoppes av et papirark, betastråling (raske elektroner) av tynn aluminium, mens gammastråling (fotoner) krever tykt bly eller betong.',
+    summaryTitle:
+      'Ikke all ioniserende stråling er lys – radioaktive atomkjerner skyter også ut tunge alfapartikler og lynraske betaelektroner!',
+    whatHappens:
+      'Mens stabile atomkjerner holder sammen for alltid, har radioaktive isotoper for mange eller for få nøytroner. For å bli mer stabile sender kjernen spontant ut stråling – det måler vi i becquerel (Bq, antall kjernenedbrytninger per sekund). Ved ALFASTRÅLING (α) skytes en tung heliumkjerne (2p⁺ + 2n⁰) ut; den gjør stor skade på nært hold, men stoppes av et enkelt papirark. Ved BETASTRÅLING (β) omdannes et nøytron til et proton og et raskt elektron som trenger gjennom papir, men stoppes av tynn aluminium. Ved GAMMASTRÅLING (γ) kvitter kjernen seg med overskuddsenergi som ekstremt gjennomtrengende fotoner som krever tykt bly eller betong.',
+    keyTraits: [
+      {
+        title: 'Halveringstid (T½): Naturens ustoppelige klokke',
+        description:
+          'Tiden det tar før halvparten av de radioaktive kjernene i en prøve har brutt ned. Karbon-14 har T½ = 5 730 år (brukes til å datere vikingskip), mens uran-238 har 4,5 milliarder år!',
+        icon: 'clock',
+      },
+      {
+        title: 'Innvendig vs. utvendig fare',
+        description:
+          'Alfastråling fra radon stopper mot huden utenfra, men puster vi radongass ned i lungene, treffer alfapartiklene ubeskyttede lungeceller rett på kloss hold.',
+        icon: 'shield',
+      },
+      {
+        title: 'Nyttig i medisin og industri',
+        description:
+          'Radioaktive isotoper med kort halveringstid brukes som sporstoffer i kreftdiagnostikk (PET-skanning), til strålebehandling av svulster og i vanlige røykvarslere (americium-241).',
+        icon: 'atom',
+      },
+    ],
+    classroomTest:
+      'Halveringstid med 100 terninger: Kast alle terningene, og ta bort alle som viser «6» (de har henfalt). Gjenta kastene og tell hvor mange som er igjen for hvert steg – kurven følger nøyaktig eksponentiell nedbrytning!',
+    didYouKnow:
+      'En vanlig banan inneholder ørlite naturlig radioaktivt kalium-40 (rundt 15 Bq) – helt ufarlig, men morsomt å vite at også maten vår sender ut noen få partikler hvert sekund!',
+    examples: [
+      'Alfastråling (α)',
+      'Betastråling (β)',
+      'Gammastråling (γ)',
+      'Becquerel (Bq) & Sievert (Sv)',
+    ],
+  },
+
+  {
+    id: 'rad_health_protection',
+    stepIndex: 13,
+    isMainPath: true,
+    parentId: 'rad_radioactivity_decay',
+    stepNumber: 14,
+    title: 'Stråling, helseeffekter, strålevern og kildekritikk',
+    shortLabel: 'Helse, strålevern & kildekritikk',
+    subtitleTag:
+      'Hva er egentlig farlig for DNA, hva er ufarlig, og hvordan vurderer vi påstander i media?',
+    timeAfterBB: 'Norge snitt: ~3–4 mSv/år',
+    eraLabel: 'Sone 4 • Bølger & Helse',
+    temperatureLabel: 'UV • Radon • 5G-myter',
+    x: 3415,
+    y: 444,
+    cardSide: 'above',
+    zoneCategory: 'earth_tech_health',
+    epochCategory: 'modern_cosmos',
+    cosmicTag: 'Fotonenergi (ikke «naturlig vs. kunstig») avgjør helserisiko',
+    traceBadge: 'NAT01-05 • Helse & Kildekritikk',
+    image: cosmosImg('rad_extra_health_protection.jpg'),
+    imageCaption:
+      'Ikke-ioniserende radio- og WiFi-bølger passerer DNA uten å bryte kjemiske bindinger (t.v.), mens ioniserende UV-, røntgen- og gammastråling kan slå løs elektroner og skade DNA (t.h.). Til høyre: solkrem mot UV, radonmåling og røntgenvern.',
+    summaryTitle:
+      'Skal du vurdere helserisiko av stråling, er det alltid én fysisk grense som teller: Er strålingen ioniserende eller ikke?',
+    whatHappens:
+      'I nyheter og sosiale medier blandes ofte ufarlig og farlig stråling sammen. Fysikken setter en knivskarp grense: Ikke-ioniserende stråling (mobil, WiFi, 5G, strømnett) har altfor lav fotonenergi til å slå løs elektroner eller skade DNA. Ioniserende stråling (UV-B/C fra sola/solarium, medisinsk røntgen/CT og alfastråling fra radon i kjellere) har derimot høy nok energi til å skade DNA-tråder direkte eller danne reaktive frie radikaler. Skader på arvestoffet kan føre til celledød eller kreft over tid. Derfor måler vi helseeffekten av stråledoser i sievert (Sv) og bruker enkle strålevernregler: solkrem og skygge mot UV, radonmåling i bolig (tiltaksgrense 100 Bq/m³), og bare nødvendig røntgen/CT.',
+    keyTraits: [
+      {
+        title: 'Naturlig bakgrunnsstråling i Norge (~3–4 mSv/år)',
+        description:
+          'Over halvparten av stråledosen nordmenn får i løpet av et år kommer fra naturlig radongass fra berggrunnen og kosmisk stråling – resten fra medisinsk bruk (røntgen/CT) og mat.',
+        icon: 'globe',
+      },
+      {
+        title: 'Sjekkliste for kildekritikk om stråling',
+        description:
+          'Når en artikkel advarer mot «farlig stråling»: (1) Er den ioniserende eller ikke-ioniserende? (2) Hva er dosen (mSv/W)? (3) Viser kilden til uavhengig, fagfellevurdert forskning som DSA eller WHO?',
+        icon: 'scale',
+      },
+      {
+        title: 'Strålevern i praksis: Tid, avstand og skjerming',
+        description:
+          'All strålebeskyttelse bygger på tre enkle prinsipper: kortere oppholdstid ved kilden, større avstand (intensiteten faller med kvadratet av avstanden) og riktig skjerming (bly/betong/solkrem).',
+        icon: 'shield',
+      },
+    ],
+    classroomTest:
+      'Kildekritikk-øvelse i klassen: La elevene finne én skremselsartikkel om «5G-stråling» og én faktaartikkel fra Direktoratet for strålevern og atomsikkerhet (DSA). Be dem sjekke om artiklene oppgir frekvens, ioniserende evne og målbare doser!',
+    didYouKnow:
+      'En vanlig flytur fra Oslo til New York gir omtrent 0,04 mSv i ekstra kosmisk stråling – omtrent det samme som fire–fem dager med vanlig naturlig bakgrunnsstråling på bakken i Norge!',
+    examples: [
+      'Radon i inneluft',
+      'Kildekritikk om stråling',
+      'Ikke-ioniserende stråling',
+      'Ioniserende stråling',
+    ],
+  },
 ];
 
 export const RADIATION_NODE_MAP: Record<string, RadiationNodeData> =
@@ -798,5 +1042,125 @@ export const RADIATION_CONTROL_QUESTIONS: ControlQuestionItem[] = [
     ],
     takeaway:
       'Samme atmosfære beskytter DNA-et vårt mot kortbølget UV/røntgen fra rommet OG holder kloden frostfri ved å bremse langbølget infrarød varme på vei ut!',
+  },
+  {
+    id: 'rad-q5',
+    number: 5,
+    question:
+      'Forklar hva som skjer ved refleksjon, brytning, bøyning og interferens – og gi ett praktisk eksempel på hver!',
+    contextHint:
+      'Se på Steg 11: Tenk på speil, regndråper/prisme, lyd rundt hushjørner og LIGO/støydempende hodetelefoner.',
+    points: [
+      {
+        heading: 'Refleksjon: Bølgen spretter tilbake med lik vinkel',
+        badge: 'Speil & parabol',
+        detail:
+          'Innfallsvinkel = refleksjonsvinkel. Brukes i baderomsspeil, speilteleskoper (JWST) og parabolantenner.',
+      },
+      {
+        heading: 'Brytning (refraksjon): Bølgen endrer retning i nytt stoff',
+        badge: 'Prisme & briller',
+        detail:
+          'Når lys går fra luft til glass eller vann, endres farten og bølgen bøyer av. Skaper regnbuer og fokuserer lys i briller.',
+      },
+      {
+        heading: 'Bøyning (diffraksjon) & interferens: Spredning og overlagring',
+        badge: '5G, lyd & LIGO',
+        detail:
+          'Bølger runder kanter/spalter på størrelse med bølgelengden (derfor hører vi lyd rundt hjørner). Overlappende bølger forsterker (konstruktiv) eller slukker (destruktiv) hverandre.',
+      },
+    ],
+    takeaway:
+      'Alle bølger følger disse fire reglene – de forklarer alt fra optikk og regnbuer til mobilnett og gravitasjonsbølge-detektorer!',
+  },
+  {
+    id: 'rad-q6',
+    number: 6,
+    question:
+      'Gjør rede for hovedprinsippene i trådløs kommunikasjon (fra sender til mottaker), og forklar hvorfor 5 GHz WiFi er raskere enn 2,4 GHz, men har kortere rekkevidde!',
+    contextHint:
+      'Se på Steg 12: Bruk begrepene bærebølge, modulasjon, demodulasjon og bøyning gjennom vegger.',
+    points: [
+      {
+        heading: 'Digitalisering → bærebølge → modulasjon → antenne',
+        badge: 'Senderen',
+        detail:
+          'Data (0 og 1) pakkes inn på en jevn høyfrekvent bærebølge ved å variere amplitude (AM), frekvens (FM) eller digitale faser/amplituder.',
+      },
+      {
+        heading: 'Mottakerantenne & demodulasjon',
+        badge: 'Mottakeren',
+        detail:
+          'Radiobølgen setter elektronene i mottakerantennen i svingning, og mottakeren skreller av bærebølgen for å hente ut nullene og enerne igjen.',
+      },
+      {
+        heading: 'Høyere frekvens gir mer data, men svakere vegg-penetrering',
+        badge: '2,4 vs. 5 GHz',
+        detail:
+          '5 GHz svinger raskere og bærer mer data per sekund, men kortere bølgelengde gir mindre bøyning rundt og gjennom vegger enn 2,4 GHz.',
+      },
+    ],
+    takeaway:
+      'Trådløs teknologi bygger på å modulere informasjon oppå en elektromagnetisk bærebølge – der frekvensvalget alltid er et kompromiss mellom fart og rekkevidde.',
+  },
+  {
+    id: 'rad-q7',
+    number: 7,
+    question:
+      'Sammenlign alfa- (α), beta- (β) og gammastråling (γ) ut fra hva de består av, gjennomtrengningsevne og skjerming, og forklar hva halveringstid betyr!',
+    contextHint:
+      'Se på Steg 13: Tenk på papir, aluminiumsplate og bly – og hvorfor α-stråling fra radon likevel er farlig i lungene.',
+    points: [
+      {
+        heading: 'α-stråling (heliumkjerne): Stoppes av papir/hud, svært ioniserende',
+        badge: 'Tung partikkel',
+        detail:
+          'Har størst masse og ladning (+2), mister energien raskt, men gjør stor skade hvis kilden (f.eks. radon) pustes inn.',
+      },
+      {
+        heading: 'β-stråling (raskt elektron): Stoppes av tynn aluminium',
+        badge: 'Middels rekkevidde',
+        detail:
+          'Sendes ut når et nøytron blir til et proton i kjernen. Trenger gjennom papir og hud, men bremses av noen millimeter metall.',
+      },
+      {
+        heading: 'γ-stråling (foton) & halveringstid (T½)',
+        badge: 'Tykt bly / betong',
+        detail:
+          'Uladde, høyenergetiske fotoner krever tykt bly/betong. Halveringstiden T½ er tiden før halvparten av de ustabile atomkjernene har brutt ned.',
+      },
+    ],
+    takeaway:
+      'Jo tyngre og mer ladd strålingspartikkelen er, desto lettere stoppes den utenfra – men desto mer energi legger den igjen lokalt inne i kroppen.',
+  },
+  {
+    id: 'rad-q8',
+    number: 8,
+    question:
+      'Hvordan kan vi bruke fysikkunnskap og kildekritikk til å skille mellom reell helserisiko (UV, radon, røntgen) og ugrunnet frykt for stråling fra mobil/WiFi?',
+    contextHint:
+      'Se på Steg 14: Bruk skillet mellom ikke-ioniserende og ioniserende stråling og enheten sievert (Sv).',
+    points: [
+      {
+        heading: 'Skillelinjen går ved ioniserende energi (E = h · f)',
+        badge: 'Fotonenergi',
+        detail:
+          'Mobil, WiFi og 5G sender ikke-ioniserende radiobølger med altfor lav fotonenergi til å bryte DNA-bindinger. UV-B/C, røntgen, gamma og alfa fra radon er ioniserende.',
+      },
+      {
+        heading: 'Reelle strålekilder i Norge (~3–4 mSv/år)',
+        badge: 'Radon & UV',
+        detail:
+          'Radongass i kjellere (tiltaksgrense 100 Bq/m³), sterk UV-stråling fra sol/solarium og unødvendige CT-undersøkelser står for den faktiske helserisikoen.',
+      },
+      {
+        heading: 'Sjekk kilder og doser kritisk',
+        badge: 'Kildekritikk',
+        detail:
+          'Sjekk alltid om kilden oppgir strålingstype, dose (mSv) og bygger på fagfellevurdert forskning eller etater som DSA og WHO.',
+      },
+    ],
+    takeaway:
+      'Det er ikke om en strålekilde er menneskeskapt eller naturlig som avgjør faren – det er fotonenergien, strålingstypen og dosen (sievert)!',
   },
 ];
