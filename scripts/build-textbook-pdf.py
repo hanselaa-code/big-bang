@@ -15,6 +15,7 @@ import html as html_lib
 import io
 import json
 import os
+import re
 import subprocess
 import tempfile
 from PIL import Image
@@ -28,6 +29,15 @@ OUT_PDF = os.path.join(ROOT, "public", "Universet-Laerebok-Vg1.pdf")
 
 def esc(text: str) -> str:
     return html_lib.escape(str(text), quote=True)
+
+
+def format_rich_text(text: str, allow_html: bool = False) -> str:
+    s = str(text) if allow_html else esc(text)
+    s = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", s)
+    s = re.sub(r"(?<!\w)\*([^\*\n]+?)\*(?!\w)", r"<em>\1</em>", s)
+    if not allow_html or "<p>" not in s:
+        s = s.replace("\n\n", "<br><br>").replace("\n", "<br>")
+    return s
 
 
 def load_curriculum_json() -> dict:
@@ -125,6 +135,16 @@ def build_html(data: dict) -> str:
             """
         )
 
+    total_sections = 0
+    total_cqs = 0
+    total_mcqs = 0
+    for theme in themes:
+        enr = CHAPTER_ENRICHMENTS[theme["id"]]
+        total_sections += len(theme["allNodes"]) + len(enr.get("extra_sections", []))
+        total_cqs += len(theme["controlQuestions"]) + len(enr.get("extra_control_questions", []))
+        total_mcqs += len(theme["mcqQuestions"])
+    total_tasks = total_cqs + total_mcqs
+
     # Table of Contents
     toc_blocks = []
     for theme in themes:
@@ -136,6 +156,14 @@ def build_html(data: dict) -> str:
             sub_items.append(
                 f"<li><span class='toc-num'>{ch_num}.{idx}</span> {esc(node['title'])}</li>"
             )
+        extra_sections = enr.get("extra_sections", [])
+        base_count = len(theme["allNodes"])
+        for extra_idx, sec in enumerate(extra_sections, start=1):
+            sec_num = base_count + extra_idx
+            sub_items.append(
+                f"<li><span class='toc-num'>{ch_num}.{sec_num}</span> {esc(sec['title'])}</li>"
+            )
+        summary_num = base_count + len(extra_sections) + 1
         toc_blocks.append(
             f"""
             <div class="toc-chapter">
@@ -145,7 +173,7 @@ def build_html(data: dict) -> str:
               </div>
               <ul class="toc-list">
                 {''.join(sub_items)}
-                <li><span class="toc-num">{ch_num}.11</span> Oppsummering &amp; kontrollspørsmål</li>
+                <li><span class='toc-num'>{ch_num}.{summary_num}</span> Oppsummering &amp; kontrollspørsmål</li>
               </ul>
             </div>
             """
@@ -164,12 +192,17 @@ def build_html(data: dict) -> str:
         goals_li = "".join(f"<li>{esc(g)}</li>" for g in enr["learning_goals"])
 
         sections_html = []
-        for idx, node in enumerate(theme["allNodes"]):
+        extra_sections = enr.get("extra_sections", [])
+        all_chapter_sections = list(theme["allNodes"]) + list(extra_sections)
+        base_count = len(theme["allNodes"])
+
+        for idx, node in enumerate(all_chapter_sections):
             sec_num = idx + 1
+            is_extra = idx >= base_count
             node_img_uri = encode_img_data_uri(node["image"], img_cache, max_w=860, quality=80)
 
             traits_li = "".join(
-                f"<li><strong>{esc(tr['title'])}:</strong> {esc(tr['description'])}</li>"
+                f"<li><strong>{esc(tr['title'])}:</strong> {format_rich_text(tr['description'])}</li>"
                 for tr in node.get("keyTraits", [])
             )
             examples_pills = "".join(
@@ -177,30 +210,34 @@ def build_html(data: dict) -> str:
                 for ex in node.get("examples", [])
             )
 
+            dd = node.get("deep_dive") if is_extra else enr.get("deep_dives", {}).get(idx)
             deep_dive_html = ""
-            if idx in enr.get("deep_dives", {}):
-                dd = enr["deep_dives"][idx]
+            if dd:
                 deep_dive_html = f"""
                 <div class="deep-dive-box" style="border-left-color:{accent}; background:{accent_soft};">
                   <div class="box-title" style="color:{accent}">🔬 {esc(dd['title'])}</div>
-                  <p>{dd['body']}</p>
+                  <p>{format_rich_text(dd['body'], allow_html=True)}</p>
                 </div>
                 """
+
+            table_html = render_table_html(node["table"]) if node.get("table") else ""
 
             analogy_html = ""
             if node.get("classroomTest"):
                 analogy_html = f"""
                 <div class="analogy-box">
                   <div class="box-title">💡 Klasseromstriks &amp; tankeeksperiment</div>
-                  <p>{esc(node['classroomTest'])}</p>
+                  <p>{format_rich_text(node['classroomTest'])}</p>
                 </div>
                 """
 
             did_you_know_html = ""
             if node.get("didYouKnow"):
                 did_you_know_html = f"""
-                <p class="summary-p"><strong>Visste du at?</strong> {esc(node['didYouKnow'])}</p>
+                <p class="summary-p"><strong>Visste du at?</strong> {format_rich_text(node['didYouKnow'])}</p>
                 """
+
+            traits_heading = node.get("traitsHeading", theme["traitsHeading"])
 
             sections_html.append(
                 f"""
@@ -228,14 +265,15 @@ def build_html(data: dict) -> str:
                   </figure>
 
                   <div class="sec-body">
-                    <p class="story-p">{esc(node['whatHappens'])}</p>
+                    <p class="story-p">{format_rich_text(node['whatHappens'])}</p>
                     {did_you_know_html}
 
                     <div class="traits-wrap">
-                      <div class="traits-heading">{esc(theme['traitsHeading'])}</div>
+                      <div class="traits-heading">{esc(traits_heading)}</div>
                       <ul class="traits-list">{traits_li}</ul>
                     </div>
 
+                    {table_html}
                     {deep_dive_html}
                     {analogy_html}
 
@@ -249,9 +287,11 @@ def build_html(data: dict) -> str:
             )
 
         # Chapter summary + Control questions
+        summary_num = base_count + len(extra_sections) + 1
         sum_li = "".join(f"<li>{esc(s)}</li>" for s in enr["summary_points"])
+        all_cqs = list(theme["controlQuestions"]) + list(enr.get("extra_control_questions", []))
         cq_blocks = []
-        for q_idx, cq in enumerate(theme["controlQuestions"], start=1):
+        for q_idx, cq in enumerate(all_cqs, start=1):
             cq_blocks.append(
                 f"""
                 <div class="cq-item">
@@ -284,7 +324,7 @@ def build_html(data: dict) -> str:
 
               <div class="chapter-end">
                 <div class="summary-box" style="border-left-color:{accent}">
-                  <h3>{ch_num}.11 Oppsummering av kapittel {ch_num}</h3>
+                  <h3>{ch_num}.{summary_num} Oppsummering av kapittel {ch_num}</h3>
                   <ul>{sum_li}</ul>
                 </div>
 
@@ -353,24 +393,32 @@ def build_html(data: dict) -> str:
             """
         )
 
-    # Full answers for the 24 Control Questions (with comparison tables!)
+    # Full answers for the Control Questions (with comparison tables!)
     cq_answers_html = []
     for theme in themes:
         enr = CHAPTER_ENRICHMENTS[theme["id"]]
         ch_num = enr["chapter_num"]
         ch_short = theme["dropdownTitle"].split(" – ")[0]
+        all_cqs = list(theme["controlQuestions"]) + list(enr.get("extra_control_questions", []))
         items = []
-        for q_idx, cq in enumerate(theme["controlQuestions"], start=1):
+        for q_idx, cq in enumerate(all_cqs, start=1):
             tbl = render_table_html(cq["comparisonTable"]) if cq.get("comparisonTable") else ""
             pts_li = "".join(
                 f"<li><strong>{esc(pt['heading'])}:</strong> {esc(pt['detail'])}</li>"
                 for pt in cq.get("points", [])
             )
+            pts_html = f'<ul class="traits-list" style="margin-top:3pt;">{pts_li}</ul>' if pts_li else ""
+            ans_html = (
+                f'<p class="cq-ans-a"><strong>Fasit:</strong> {format_rich_text(cq["answer"])}</p>'
+                if cq.get("answer")
+                else ""
+            )
             items.append(
                 f"""
                 <div class="cq-ans-item">
                   <div class="cq-ans-q"><strong>Oppgave {ch_num}.{q_idx}:</strong> {esc(cq['question'])}</div>
-                  <ul class="traits-list" style="margin-top:3pt;">{pts_li}</ul>
+                  {ans_html}
+                  {pts_html}
                   {tbl}
                 </div>
                 """
@@ -1115,7 +1163,7 @@ def build_html(data: dict) -> str:
       </div>
       <div class="cover-footer">
         <span>Interaktiv nettutgave: https://hanselaa-code.github.io/big-bang/</span>
-        <span>6 kapitler • 60 illustrerte deler • Ordliste • 84 oppgaver med fasit</span>
+        <span>6 kapitler • {total_sections} illustrerte deler • Ordliste • {total_tasks} oppgaver med fasit</span>
       </div>
     </div>
   </section>
@@ -1178,9 +1226,9 @@ def build_html(data: dict) -> str:
       </div>
       <ul class="toc-list" style="display:grid; grid-template-columns:1fr 1fr; gap:2pt 12pt;">
         <li><span class="toc-num">7.1</span> Begrepsordliste (A–Å)</li>
-        <li><span class="toc-num">7.2</span> Komplett øvingsprøve (60 flervalgsoppgaver)</li>
-        <li><span class="toc-num">7.3</span> Fasit: Kontrollspørsmål (24 oppgaver + tabeller)</li>
-        <li><span class="toc-num">7.4</span> Fasit: Flervalgsoppgaver (60 oppgaver)</li>
+        <li><span class="toc-num">7.2</span> Komplett øvingsprøve ({total_mcqs} flervalgsoppgaver)</li>
+        <li><span class="toc-num">7.3</span> Fasit: Kontrollspørsmål ({total_cqs} oppgaver + tabeller)</li>
+        <li><span class="toc-num">7.4</span> Fasit: Flervalgsoppgaver ({total_mcqs} oppgaver)</li>
       </ul>
     </div>
   </section>

@@ -3,6 +3,16 @@
 Pedagogisk fordypningsstoff, læringsmål (LK20), formler, sammenhenger og ordliste
 for den komplette Vg1 Naturfag-læreboken om Universet.
 """
+import os
+import sys
+
+_HERE = os.path.dirname(os.path.abspath(__file__))
+if _HERE not in sys.path:
+    sys.path.insert(0, _HERE)
+
+from enrichment_parts.part_radioactivity import PART_DATA as RADIOACTIVITY_DATA
+from enrichment_parts.part_waves import PART_DATA as WAVES_DATA
+from enrichment_parts.part_wireless_health import PART_DATA as WIRELESS_HEALTH_DATA
 
 CHAPTER_ENRICHMENTS = {
     "big-bang": {
@@ -404,3 +414,23 @@ GLOSSARY = [
     ("Supernova", "En voldsom eksplosjon som avslutter livet til tunge stjerner (> 8 M☉) når jernkjernen kollapser, og som smir og sprer tunge grunnstoffer."),
     ("Valenselektron", "Elektron i det ytterste elektronskallet til et atom; avgjørende for atomets kjemiske egenskaper."),
 ]
+
+def _merge_enrichment_parts() -> None:
+    existing_terms = {term.strip().lower(): idx for idx, (term, _) in enumerate(GLOSSARY)}
+    for part in (RADIOACTIVITY_DATA, WAVES_DATA, WIRELESS_HEALTH_DATA):
+        ch_id = part["target_chapter"]
+        ch = CHAPTER_ENRICHMENTS[ch_id]
+        ch["learning_goals"].extend(part.get("extra_learning_goals", []))
+        ch["summary_points"].extend(part.get("extra_summary_points", []))
+        ch.setdefault("extra_sections", []).extend(part.get("sections", []))
+        ch.setdefault("extra_control_questions", []).extend(part.get("extra_control_questions", []))
+        for term, definition in part.get("extra_glossary", {}).items():
+            key = term.strip().lower()
+            if key not in existing_terms:
+                existing_terms[key] = len(GLOSSARY)
+                GLOSSARY.append((term, definition))
+    GLOSSARY.sort(key=lambda item: item[0].lower())
+
+
+_merge_enrichment_parts()
+
