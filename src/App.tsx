@@ -143,6 +143,7 @@ export function App() {
       }
       setClosingSlide(null);
       setIsQuizOpen(false);
+      setIsQrOpen(false);
       setLightboxNode(null);
     };
     window.addEventListener('hashchange', syncFromUrl);

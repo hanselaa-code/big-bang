@@ -23,10 +23,11 @@ export function QrShareModal({
   const [svgMarkup, setSvgMarkup] = useState<string>('');
   const [copied, setCopied] = useState(false);
 
-  const displayTitle =
-    activeView === 'universet'
-      ? UNIVERSE_CENTER_NODE.dropdownTitle
-      : activeTheme.dropdownTitle;
+  const isOverview = activeView === 'universet';
+  const shareScopeLabel = isOverview ? 'Temastartside' : 'Undertema';
+  const displayTitle = isOverview
+    ? UNIVERSE_CENTER_NODE.dropdownTitle
+    : activeTheme.title;
 
   const shareUrl = useMemo(() => {
     const targetHash = activeView === 'universet' ? '' : activeTheme.hash;
@@ -35,7 +36,9 @@ export function QrShareModal({
       const isPublicWeb =
         (protocol === 'https:' || protocol === 'http:') &&
         hostname !== 'localhost' &&
-        hostname !== '127.0.0.1';
+        hostname !== '127.0.0.1' &&
+        hostname !== '[::1]' &&
+        hostname !== '::1';
       if (isPublicWeb) {
         const base = `${origin}${pathname}`;
         return `${base}${targetHash}`;
@@ -104,7 +107,7 @@ export function QrShareModal({
         <div className="space-y-1.5">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-400/35 text-amber-300 text-xs font-bold uppercase tracking-wider">
             <QrCode className="w-3.5 h-3.5" />
-            <span>Del visning: {displayTitle}</span>
+            <span>{shareScopeLabel}</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-white font-display">
             Skann for å åpne på mobil
