@@ -5,12 +5,14 @@ import type { CosmicNodeData } from '../data/bigBangData';
 interface NodeVideoPlayerProps {
   node: CosmicNodeData;
   videoUrl: string;
+  compact?: boolean;
   onOpenLightbox: (node: CosmicNodeData) => void;
 }
 
 export function NodeVideoPlayer({
   node,
   videoUrl,
+  compact = false,
   onOpenLightbox,
 }: NodeVideoPlayerProps) {
   const [isActivated, setIsActivated] = useState(false);
@@ -47,8 +49,12 @@ export function NodeVideoPlayer({
   };
 
   return (
-    <figure className="relative group rounded-xl overflow-hidden border border-slate-700/70 bg-slate-900 shadow-lg">
-      <div className="aspect-video w-full overflow-hidden bg-slate-950 relative">
+    <figure className="relative group rounded-xl overflow-hidden border border-slate-700/70 bg-slate-900 shadow-lg shrink-0">
+      <div
+        className={`w-full overflow-hidden bg-slate-950 relative ${
+          compact ? 'h-[clamp(135px,27vh,260px)]' : 'aspect-video'
+        }`}
+      >
         {!isActivated ? (
           <>
             <button
@@ -65,12 +71,22 @@ export function NodeVideoPlayer({
               />
 
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/65 via-slate-950/15 to-transparent transition-opacity group-hover/play:via-slate-950/25 flex flex-col items-center justify-center gap-2.5">
-                <div className="w-16 h-16 sm:w-18 sm:h-18 rounded-full bg-slate-950/75 group-hover/play:bg-amber-400 border-2 border-amber-400/85 group-hover/play:border-amber-200 text-amber-300 group-hover/play:text-slate-950 flex items-center justify-center shadow-[0_0_32px_rgba(245,158,11,0.45)] group-hover/play:scale-110 transition-all duration-300">
-                  <Play className="w-7 h-7 sm:w-8 sm:h-8 fill-current ml-1" />
+                <div
+                  className={`rounded-full bg-slate-950/75 group-hover/play:bg-amber-400 border-2 border-amber-400/85 group-hover/play:border-amber-200 text-amber-300 group-hover/play:text-slate-950 flex items-center justify-center shadow-[0_0_32px_rgba(245,158,11,0.45)] group-hover/play:scale-110 transition-all duration-300 ${
+                    compact ? 'w-12 h-12' : 'w-16 h-16 sm:w-18 sm:h-18'
+                  }`}
+                >
+                  <Play
+                    className={`fill-current ml-1 ${
+                      compact ? 'w-5 h-5' : 'w-7 h-7 sm:w-8 sm:h-8'
+                    }`}
+                  />
                 </div>
-                <span className="px-3 py-1 rounded-full bg-slate-950/85 border border-amber-400/40 text-amber-200 text-xs font-bold tracking-wide shadow-md">
-                  Trykk på bildet for å spille av video
-                </span>
+                {!compact && (
+                  <span className="px-3 py-1 rounded-full bg-slate-950/85 border border-amber-400/40 text-amber-200 text-xs font-bold tracking-wide shadow-md">
+                    Trykk på bildet for å spille av video
+                  </span>
+                )}
               </div>
             </button>
 
@@ -146,9 +162,11 @@ export function NodeVideoPlayer({
         )}
       </div>
 
-      <figcaption className="px-3.5 py-2 bg-slate-950/85 text-xs text-slate-300 border-t border-slate-800/80 leading-relaxed">
-        {node.imageCaption}
-      </figcaption>
+      {!compact && (
+        <figcaption className="px-3.5 py-2 bg-slate-950/85 text-xs text-slate-300 border-t border-slate-800/80 leading-relaxed">
+          {node.imageCaption}
+        </figcaption>
+      )}
     </figure>
   );
 }
