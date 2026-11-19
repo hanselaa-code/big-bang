@@ -2,6 +2,11 @@ import { Minimize } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
 import { BigBangTimeline } from './components/BigBangTimeline';
 import { ElementsExplorer } from './components/ElementsExplorer';
+import {
+  FullscreenClosingSlide,
+  type ClosingReflectionPrompt,
+  type ClosingSlideMode,
+} from './components/FullscreenClosingSlide';
 import { GalaxiesExplorer } from './components/GalaxiesExplorer';
 import { ImageLightbox } from './components/ImageLightbox';
 import { InfoPanel } from './components/InfoPanel';
@@ -23,6 +28,39 @@ import {
   type ThemeId,
 } from './data/themes';
 import { UNIVERSE_CENTER_NODE } from './data/universeHubData';
+
+const UNIVERSE_REFLECTION_PROMPTS: Record<string, ClosingReflectionPrompt> = {
+  'big-bang': {
+    question:
+      'Når vi ser på en galakse 10 milliarder lysår unna, ser vi hvordan den så ut for 10 milliarder år siden. Hva betyr det for hvordan astronomer forsker på universets historie?',
+    hint: 'Tenk på at lyshastigheten er endelig — teleskoper fungerer som «tidsmaskiner» bakover mot Big Bang.',
+  },
+  stjerner: {
+    question:
+      'Hvorfor sier astronomer ofte at «vi er laget av stjernestøv» — og hvordan ville jorda sett ut hvis ingen tunge stjerner noensinne hadde eksplodert som supernovaer?',
+    hint: 'Tenk på hvor karbon, oksygen, jern og gull faktisk ble dannet.',
+  },
+  grunnstoffer: {
+    question:
+      'Hvis universet startet med nesten bare hydrogen og helium, hvorfor er det likevel så mye jern, silisium og oksygen på jorda?',
+    hint: 'Koble kjernefusjon i stjerner, supernovaeksplosjoner og hvordan nye solsystemer samler opp gass og støv.',
+  },
+  straling: {
+    question:
+      'Menneskeøyet ser bare en bitteliten del av det elektromagnetiske spekteret. Hva ville vi gått glipp av i universet hvis vi bare brukte vanlige optiske teleskoper?',
+    hint: 'Tenk på kosmisk bakgrunnsstråling (mikrobølger), infrarødt lys gjennom støvskyer og røntgenstråling fra svarte hull.',
+  },
+  galakser: {
+    question:
+      'Når Melkeveien og Andromedagalaksen kolliderer om ca. 4,5 milliarder år, vil nesten ingen stjerner krasje i hverandre. Hvordan er det mulig?',
+    hint: 'Tenk på hvor enorme avstandene mellom stjernene er sammenlignet med størrelsen på selve stjernene.',
+  },
+  romtid: {
+    question:
+      'Hvordan kan GPS-en på mobilen din være et daglig bevis på at Einsteins relativitetsteori faktisk stemmer?',
+    hint: 'Tenk på at klokkene i GPS-satellittene går litt annerledes både på grunn av farten deres og svakere tyngdekraft høyt over jorda.',
+  },
+};
 
 interface ThemeProgressState {
   currentStepIndex: number;
@@ -65,6 +103,9 @@ export function App() {
   const [lightboxNode, setLightboxNode] = useState<CosmicNodeData | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isCinemaFallback, setIsCinemaFallback] = useState(false);
+  const [closingSlide, setClosingSlide] = useState<ClosingSlideMode | null>(
+    null,
+  );
 
   const isMindMap = activeView === 'universet';
   const activeTheme = THEMES[activeThemeId];
@@ -81,6 +122,12 @@ export function App() {
   }, []);
 
   useEffect(() => {
+    if (!isFullscreen) {
+      setClosingSlide(null);
+    }
+  }, [isFullscreen]);
+
+  useEffect(() => {
     const pageTitle = isMindMap
       ? UNIVERSE_CENTER_NODE.dropdownTitle
       : activeTheme.title;
@@ -94,6 +141,7 @@ export function App() {
       if (nextView !== 'universet') {
         setActiveThemeId(nextView);
       }
+      setClosingSlide(null);
       setIsQuizOpen(false);
       setLightboxNode(null);
     };
@@ -110,6 +158,7 @@ export function App() {
     if (nextView !== 'universet') {
       setActiveThemeId(nextView);
     }
+    setClosingSlide(null);
     setIsQuizOpen(false);
     setLightboxNode(null);
 
@@ -133,6 +182,7 @@ export function App() {
     (nextIdx: number) => {
       const mainIds = activeTheme.mainStepIds;
       const clamped = Math.max(0, Math.min(mainIds.length - 1, nextIdx));
+      setClosingSlide(null);
       setProgressByTheme((prev) => {
         const cur = prev[activeThemeId];
         return {
@@ -155,14 +205,27 @@ export function App() {
   const handleNext = useCallback(() => {
     if (isQuizOpen || isQrOpen) return;
 
+    if (isFullscreen && closingSlide === 'summary') {
+      setClosingSlide('questions');
+      return;
+    }
+    if (isFullscreen && closingSlide === 'questions') {
+      setIsQuizOpen(true);
+      return;
+    }
+
     if (currentStepIndex < activeTheme.mainStepIds.length - 1) {
       jumpToStep(currentStepIndex + 1);
+    } else if (isFullscreen) {
+      setClosingSlide('summary');
     } else {
       setIsQuizOpen(true);
     }
   }, [
     activeTheme.mainStepIds.length,
+    closingSlide,
     currentStepIndex,
+    isFullscreen,
     isQrOpen,
     isQuizOpen,
     jumpToStep,
@@ -177,15 +240,31 @@ export function App() {
       setIsQuizOpen(false);
       return;
     }
+    if (isFullscreen && closingSlide === 'questions') {
+      setClosingSlide('summary');
+      return;
+    }
+    if (isFullscreen && closingSlide === 'summary') {
+      setClosingSlide(null);
+      return;
+    }
     if (currentStepIndex > 0) {
       jumpToStep(currentStepIndex - 1);
     }
-  }, [currentStepIndex, isQrOpen, isQuizOpen, jumpToStep]);
+  }, [
+    closingSlide,
+    currentStepIndex,
+    isFullscreen,
+    isQrOpen,
+    isQuizOpen,
+    jumpToStep,
+  ]);
 
   const handleSelectNode = useCallback(
     (nodeId: string) => {
       const target = activeTheme.nodeMap[nodeId];
       if (!target) return;
+      setClosingSlide(null);
       setProgressByTheme((prev) => {
         const cur = prev[activeThemeId];
         return {
@@ -223,6 +302,7 @@ export function App() {
   const handleResetPresentation = useCallback(() => {
     setIsQuizOpen(false);
     setIsQrOpen(false);
+    setClosingSlide(null);
     setProgressByTheme((prev) => ({
       ...prev,
       [activeThemeId]: {
@@ -399,7 +479,7 @@ export function App() {
         </main>
       ) : (
         <>
-          {/* Main split classroom stage: Left/Top Interactive Timeline + Right Info Card */}
+          {/* Main split classroom stage: Left/Top Interactive Timeline + Right Info Card, or Fullscreen Closing Slide */}
           <main
             className={`flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-12 w-full mx-auto ${
               isFullscreen
@@ -407,71 +487,119 @@ export function App() {
                 : 'p-3 pb-24 sm:p-4 sm:pb-24 lg:px-6 lg:py-4 lg:pb-4 gap-3.5 sm:gap-4 max-w-[1920px]'
             }`}
           >
-            <section
-              aria-label={activeTheme.title}
-              className="h-[44vh] min-h-[290px] sm:h-[50vh] lg:h-full lg:col-span-7 xl:col-span-7"
-            >
-              {activeThemeId === 'big-bang' && (
-                <BigBangTimeline
-                  unlockedStepIndex={unlockedStepIndex}
-                  showAllSteps={showAllSteps}
-                  selectedNodeId={selectedNodeId}
-                  onSelectNode={handleSelectNode}
+            {isFullscreen && closingSlide ? (
+              <div className="lg:col-span-12 min-h-0 h-full">
+                <FullscreenClosingSlide
+                  mode={closingSlide}
+                  themeId={activeThemeId}
+                  themeTitle={activeTheme.title}
+                  themeSubtitle={activeTheme.subtitle}
+                  accent="amber"
+                  steps={activeTheme.mainStepIds.map((id, idx) => {
+                    const n = activeTheme.nodeMap[id];
+                    return {
+                      stepNumber: idx + 1,
+                      title: n.title,
+                      shortLabel: n.shortLabel,
+                      summaryTitle: n.summaryTitle,
+                      badge: n.timeAfterBB,
+                    };
+                  })}
+                  keyTerms={Array.from(
+                    new Set(
+                      activeTheme.mainStepIds.flatMap(
+                        (id) => activeTheme.nodeMap[id]?.examples ?? [],
+                      ),
+                    ),
+                  )}
+                  reviewQuestions={activeTheme.controlQuestions
+                    .slice(0, 3)
+                    .map((q) => ({
+                      id: q.id,
+                      question: q.question,
+                      hint: q.contextHint,
+                      answerPoints: q.points.map(
+                        (p) => `${p.heading}: ${p.detail}`,
+                      ),
+                    }))}
+                  reflectionPrompt={
+                    UNIVERSE_REFLECTION_PROMPTS[activeThemeId] ?? {
+                      question: `Hva synes du er det mest fascinerende ved ${activeTheme.title.toLowerCase()}, og hvordan påvirker det vår forståelse av universet?`,
+                    }
+                  }
+                  onJumpToStep={jumpToStep}
+                  onOpenQuiz={() => setIsQuizOpen(true)}
                 />
-              )}
-              {activeThemeId === 'stjerner' && (
-                <StarsBranchingTimeline
-                  unlockedStepIndex={unlockedStepIndex}
-                  showAllSteps={showAllSteps}
-                  selectedNodeId={selectedNodeId}
-                  onSelectNode={handleSelectNode}
-                />
-              )}
-              {activeThemeId === 'grunnstoffer' && (
-                <ElementsExplorer
-                  unlockedStepIndex={unlockedStepIndex}
-                  showAllSteps={showAllSteps}
-                  selectedNodeId={selectedNodeId}
-                  onSelectNode={handleSelectNode}
-                />
-              )}
-              {activeThemeId === 'straling' && (
-                <RadiationExplorer
-                  unlockedStepIndex={unlockedStepIndex}
-                  showAllSteps={showAllSteps}
-                  selectedNodeId={selectedNodeId}
-                  onSelectNode={handleSelectNode}
-                />
-              )}
-              {activeThemeId === 'galakser' && (
-                <GalaxiesExplorer
-                  unlockedStepIndex={unlockedStepIndex}
-                  showAllSteps={showAllSteps}
-                  selectedNodeId={selectedNodeId}
-                  onSelectNode={handleSelectNode}
-                />
-              )}
-              {activeThemeId === 'romtid' && (
-                <SpacetimeExplorer
-                  unlockedStepIndex={unlockedStepIndex}
-                  showAllSteps={showAllSteps}
-                  selectedNodeId={selectedNodeId}
-                  onSelectNode={handleSelectNode}
-                />
-              )}
-            </section>
+              </div>
+            ) : (
+              <>
+                <section
+                  aria-label={activeTheme.title}
+                  className="h-[44vh] min-h-[290px] sm:h-[50vh] lg:h-full lg:col-span-7 xl:col-span-7"
+                >
+                  {activeThemeId === 'big-bang' && (
+                    <BigBangTimeline
+                      unlockedStepIndex={unlockedStepIndex}
+                      showAllSteps={showAllSteps}
+                      selectedNodeId={selectedNodeId}
+                      onSelectNode={handleSelectNode}
+                    />
+                  )}
+                  {activeThemeId === 'stjerner' && (
+                    <StarsBranchingTimeline
+                      unlockedStepIndex={unlockedStepIndex}
+                      showAllSteps={showAllSteps}
+                      selectedNodeId={selectedNodeId}
+                      onSelectNode={handleSelectNode}
+                    />
+                  )}
+                  {activeThemeId === 'grunnstoffer' && (
+                    <ElementsExplorer
+                      unlockedStepIndex={unlockedStepIndex}
+                      showAllSteps={showAllSteps}
+                      selectedNodeId={selectedNodeId}
+                      onSelectNode={handleSelectNode}
+                    />
+                  )}
+                  {activeThemeId === 'straling' && (
+                    <RadiationExplorer
+                      unlockedStepIndex={unlockedStepIndex}
+                      showAllSteps={showAllSteps}
+                      selectedNodeId={selectedNodeId}
+                      onSelectNode={handleSelectNode}
+                    />
+                  )}
+                  {activeThemeId === 'galakser' && (
+                    <GalaxiesExplorer
+                      unlockedStepIndex={unlockedStepIndex}
+                      showAllSteps={showAllSteps}
+                      selectedNodeId={selectedNodeId}
+                      onSelectNode={handleSelectNode}
+                    />
+                  )}
+                  {activeThemeId === 'romtid' && (
+                    <SpacetimeExplorer
+                      unlockedStepIndex={unlockedStepIndex}
+                      showAllSteps={showAllSteps}
+                      selectedNodeId={selectedNodeId}
+                      onSelectNode={handleSelectNode}
+                    />
+                  )}
+                </section>
 
-            <section
-              aria-label="Fagkort for valgt steg"
-              className="lg:h-full lg:col-span-5 xl:col-span-5 min-h-0"
-            >
-              <InfoPanel
-                activeTheme={activeTheme}
-                node={activeNode}
-                isFullscreen={isFullscreen}
-                onOpenLightbox={(node) => setLightboxNode(node)}
-              />
-            </section>
+                <section
+                  aria-label="Fagkort for valgt steg"
+                  className="lg:h-full lg:col-span-5 xl:col-span-5 min-h-0"
+                >
+                  <InfoPanel
+                    activeTheme={activeTheme}
+                    node={activeNode}
+                    isFullscreen={isFullscreen}
+                    onOpenLightbox={(node) => setLightboxNode(node)}
+                  />
+                </section>
+              </>
+            )}
           </main>
 
           <TimelineDock
@@ -480,9 +608,11 @@ export function App() {
             unlockedStepIndex={unlockedStepIndex}
             showAllSteps={showAllSteps}
             isFullscreen={isFullscreen}
+            closingSlide={closingSlide}
             onPrev={handlePrev}
             onNext={handleNext}
             onJumpToStep={jumpToStep}
+            onSelectClosingSlide={setClosingSlide}
           />
 
           {isQuizOpen && (
